@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Term Life Insurance - Calculator</title>
+    <link rel="shortcut icon" href="" /><!-- removes error in console if you don't have a favicon -->
+    <link rel="stylesheet" href="styles/styles.min.css">
+</head>
+<body>
+    <div class="willow-layout">
+        <!-- <div class="willow-layout__row--no-margin-bottom">
+            <div class="willow-layout__column--12">
+                <section class="willow-global-alert" role="alert">
+                    <button class="willow-global-alert__close">Button Text</button>
+                    <h1 class="willow-global-alert__heading">Alert Heading</h1>
+                    <div class="willow-global-alert__content">
+                        <div class="willow-styling-context">
+                            <p>Wow ipsum dolor sit amet, consectetur adipisicing elit. Molestiae doloremque, explicabo! Quam ipsam reprehenderit minus debitis blanditiis suscipit provident vero, incidunt hic repellendus doloribus voluptatum magni tempora ab adipisci corrupti.</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="willow-skip-nav">
+                    <a href="" class="willow-skip-nav__link" aria-label="skip to main content">Skip to Content</a>
+                </div>
+            </div>
+        </div> -->
+       <div class="willow-layout__row--no-margin-bottom">
+           <div class="willow-layout__column--12">
+               <header class="willow-page-header" role="banner">
+                    <div class="willow-page-header__branding">
+                       <a class="willow-logo-link" href="/" aria-label="go to home page">
+                            <img class="willow-logo-link__image" src="http://placehold.it/350x150" alt="" />
+                       </a>
+                    </div>
+                    <div class="willow-page-header__content-controls">
+                        <a class="willow-page-header__content-open" href="#">Menu</a>
+                        <a class="willow-page-header__content-close" href="#">Close</a>
+                    </div>
+                    <div class="willow-page-header__content">
+                        <div class="willow-page-header__navigation">
+                           <nav class="willow-primary-nav" role="navigation" aria-label="Primary Navigation">
+                               <h1 class="willow-primary-nav__heading sr-only">Primary Navigation</h1>
+                               <ul class="willow-primary-nav__list">
+                                   <li class="willow-primary-nav__item"><a class="willow-primary-nav__link" href="overview.html">Overview</a></li>
+                                   <li class="willow-primary-nav__item"><a class="willow-primary-nav__link willow-primary-nav__link--active" href="calculator.html">Calculator</a></li>
+                                   <li class="willow-primary-nav__item"><a class="willow-primary-nav__link" href="enrollment.html">Enrollment</a></li>
+                               </ul>
+                           </nav>
+                        </div>
+                    </div>
+               </header>
+           </div>
+       </div>
+       <div class="willow-layout__row">
+           <div class="willow-layout__column--12">
+               <section class="willow-banner" role="region">
+                  <h1 class="willow-banner__heading">Banner Heading</h1>
+                  <div class="willow-banner__content">
+                       <div class="willow-styling-context">
+                           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia placeat animi incidunt, dolorum obcaecati, aliquid repellat veritatis sunt reiciendis natus earum ad sit, maxime neque nulla! Deserunt dicta, molestias deleniti. </p>
+                       </div>
+                       <ul class="willow-banner__actions">
+                           <li class="willow-banner__action"><button class="willow-button willow-button--primary">Primary CTA</button></li>
+                           <li class="willow-banner__action"><button class="willow-button willow-button--secondary">Secondary CTA</button></li>
+                       </ul>
+                  </div>
+               </section>
+
+           </div>
+       </div>
+       <div class="willow-layout__row">
+           <!-- <div class="willow-layout__column--3">
+               <nav class="willow-secondary-nav" role="navigation" aria-label="Secondary Navigation">
+                  <h1 class="willow-secondary-nav__heading">Secondary Navigation</h1>
+                  <ul class="willow-secondary-nav__list">
+                      <li class="willow-secondary-nav__item"><a class="willow-secondary-nav__link" href="">Menu Item</a></li>
+                      <li class="willow-secondary-nav__item"><a class="willow-secondary-nav__link" href="">Menu Item</a></li>
+                      <li class="willow-secondary-nav__item"><a class="willow-secondary-nav__link" href="">Menu Item</a></li>
+                  </ul>
+               </nav>
+           </div> -->
+           <div class="willow-layout__column--12">
+               <main class="willow-page-content" role="main">
+                   <div class="willow-styling-context">
+                       <h1>Heading Text</h1>
+                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda magnam veritatis, voluptatem accusamus, obcaecati similique saepe nemo ipsam beatae incidunt eligendi laudantium. Ipsam ut tenetur id accusantium illo quia esse, quisquam, delectus</p>
+
+                       <h2>Life Insurance Calculator</h2>
+                       <div class="life-calc-cost-container">
+                           
+                            <div class="life-calc-cost-row">
+                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                    
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col2">
+                                        Employee
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col3">
+                                    Spouse
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col4">
+                                    Child
+                                </div>
+                            </div>
+
+                            <div class="life-calc-cost-row">
+                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                    Annual Salary:
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col2">
+                                    <input class="life-calc-input" id="life-calc-annual-salary" type="input" />
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col3">
+                                    
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col4">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="life-calc-cost-row">
+                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                    Insurance Age:
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col2">
+                                    <input class="life-calc-input" id="life-calc-employee-age" type="input" />
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col3">
+                                    <input class="life-calc-input" id="life-calc-spouse-age" type="input" />
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col4">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="life-calc-cost-row">
+                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                    Life Coverage:
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col2">
+                                    <select class="life-calc-select" id="life-calc-employee-coverage">
+                                        <option value="0">None</option>
+                                        <option value="10000">$10,000</option>
+                                        <option value="20000">$20,000</option>
+                                    </select>
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col3">
+                                    <select class="life-calc-select" id="life-calc-employee-coverage">
+                                        <option value="0">None</option>
+                                        <option value="5000">$5,000</option>
+                                        <option value="10000">$10,000</option>
+                                    </select>
+                                </div>
+
+                                <div class="life-calc-cost-col life-calc-cost-col4">
+                                    <select class="life-calc-select" id="life-calc-employee-coverage">
+                                        <option value="0">None</option>
+                                        <option value="2000">$2,000</option>
+                                        <option value="4000">$4,000</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                       </div>
+                   </div>
+               </main>
+           </div>
+       </div>
+       <div class="willow-layout__row">
+           <div class="willow-layout__column--12">
+               <footer class="willow-page-footer" role="contentinfo">
+                  <div class="willow-page-footer__branding">
+                       <a class="willow-logo-link" href="/" aria-label="go to home page">
+                            <img class="willow-logo-link__image" src="http://placehold.it/350x150" alt="" />
+                       </a>
+                  </div>
+                  <div class="willow-page-footer__navigation">
+                       <nav class="willow-footer-nav" role="navigation" aria-label="Footer Navigation">
+                          <h1 class="willow-footer-nav__heading">Footer Navigation</h1>
+                          <ul class="willow-footer-nav__list">
+                              <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="" aria-label="">Menu Item</a></li>
+                              <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="" aria-label="">Menu Item</a></li>
+                              <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="" aria-label="">Menu Item</a></li>
+                              <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="" aria-label="">Menu Item</a></li>
+                              <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="" aria-label="">Menu Item</a></li>
+                              <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="" aria-label="">Menu Item</a></li>
+                          </ul>
+                       </nav>
+                  </div>
+                  <small class="willow-page-footer__copyright">Copyright Text Goes Here</small>
+               </footer>
+           </div>
+       </div>
+    </div>
+    <script src="scripts/site.min.js"></script>
+</body>
+</html>
