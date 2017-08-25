@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@unumux/theme-enterprise-default": "^0.4.0",
+    "@unumux/theme-unum-default": "^0.4.0",
+    "@unumux/ux-build-tools": "^3.7.0"
+  },
+  "scripts": {
+    "start": "gulp --gulpfile=node_modules/@unumux/ux-build-tools/index.js --cwd=."
+  }
+}
