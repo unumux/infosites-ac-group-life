@@ -7,4 +7,12 @@
 body {
     background: #dedede;
     color: #111;
+    max-width: 900px;
+    margin: 0 auto;
 }
+
+.life-calc-cost-row{
+    display: flex;
+    justify-content: space-between;
+}
+
