@@ -57,6 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
+<<<<<<< HEAD
 # OSX
 # =========================
 .DS_Store
@@ -95,3 +96,5 @@ $RECYCLE.BIN/
 *.min.*
 *.map
 # **** very important for our willow compiling ***
+=======
+>>>>>>> d3eb2a5653f6ba47bca98656008e6c1894a3dd3f
