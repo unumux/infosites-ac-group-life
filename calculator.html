@@ -89,90 +89,278 @@
                        <div class="life-calc-cost-container">
                            
                             <div class="life-calc-cost-row">
-                                <div class="life-calc-cost-col life-calc-cost-col1">
-                                    
+                                <div class="col-1-4"></div>
+
+                                <div class="col-1-4">
+                                    Employee
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col2">
-                                        Employee
-                                </div>
-
-                                <div class="life-calc-cost-col life-calc-cost-col3">
+                                <div class="col-1-4">
                                     Spouse
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col4">
+                                <div class="col-1-4">
                                     Child
                                 </div>
                             </div>
 
                             <div class="life-calc-cost-row">
-                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                <div class="col-1-4 text-right">
                                     Annual Salary:
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col2">
-                                    <input class="life-calc-input" id="life-calc-annual-salary" type="input" />
+                                <div class="col-1-4 input-cell">
+                                    <input class="life-calc-input input-control" id="life-calc-annual-salary" type="input" value="30000" />
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col3">
-                                    
-                                </div>
+                                <div class="col-1-2"></div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col4">
-                                    
-                                </div>
                             </div>
 
                             <div class="life-calc-cost-row">
-                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                <div class="col-1-4 text-right">
                                     Insurance Age:
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col2">
-                                    <input class="life-calc-input" id="life-calc-employee-age" type="input" />
+                                <div class="col-1-4 input-cell">
+                                    <input class="life-calc-input input-control" id="life-calc-employee-age" type="input" value="21" />
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col3">
-                                    <input class="life-calc-input" id="life-calc-spouse-age" type="input" />
+                                <div class="col-1-4 input-cell">
+                                    <input class="life-calc-input input-control" id="life-calc-spouse-age" type="input" value="21" />
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col4">
+                                <div class="col-1-4">
                                     
                                 </div>
                             </div>
 
                             <div class="life-calc-cost-row">
-                                <div class="life-calc-cost-col life-calc-cost-col1">
+                                <div class="col-1-4 text-right">
+                                        Tobacco use in last 12 months?
+                                </div>
+
+                                <div class="col-1-4 input-cell">
+                                    <label><input class="life-calc-checkbox input-control" id="life-calc-employee-tobaccoYN" type="checkbox" /></label>
+                                </div>
+
+                                <div class="col-1-4 input-cell">
+                                    <label><input class="life-calc-checkbox input-control" id="life-calc-spouse-tobaccoYN" type="checkbox" /></label>
+                                </div>
+
+                                <div class="col-1-4">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="life-calc-cost-row">
+                                <div class="col-1-4 text-right">
                                     Life Coverage:
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col2">
-                                    <select class="life-calc-select" id="life-calc-employee-coverage">
+                                <div class="col-1-4 input-cell">
+                                    <select class="life-calc-select input-control" id="life-calc-life-employee-coverage">
                                         <option value="0">None</option>
                                         <option value="10000">$10,000</option>
                                         <option value="20000">$20,000</option>
                                     </select>
+                                    <div id="life-calc-life-employee-coverage-display" class="calc-premium-display">$0.00</div>
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col3">
-                                    <select class="life-calc-select" id="life-calc-employee-coverage">
+                                <div class="col-1-4 input-cell">
+                                    <select class="life-calc-select input-control" id="life-calc-life-spouse-coverage">
                                         <option value="0">None</option>
                                         <option value="5000">$5,000</option>
                                         <option value="10000">$10,000</option>
                                     </select>
+                                    <div id="life-calc-life-spouse-coverage-display" class="calc-premium-display">$0.00</div>
                                 </div>
 
-                                <div class="life-calc-cost-col life-calc-cost-col4">
-                                    <select class="life-calc-select" id="life-calc-employee-coverage">
+                                <div class="col-1-4 input-cell">
+                                    <select class="life-calc-select input-control" id="life-calc-life-employee-coverage">
                                         <option value="0">None</option>
                                         <option value="2000">$2,000</option>
                                         <option value="4000">$4,000</option>
                                     </select>
+                                    <div id="life-calc-life-child-coverage-display" class="calc-premium-display">$0.00</div>
                                 </div>
                             </div>
 
+                            <div class="life-calc-cost-row">
+                                <div class="col-1-4 text-right">
+                                    AD&amp;D Coverage:
+                                </div>
+
+                                <div class="col-1-4 input-cell">
+                                    <select class="life-calc-select input-control" id="life-calc-add-employee-coverage">
+                                        <option value="0">None</option>
+                                        <option value="10000">$10,000</option>
+                                        <option value="20000">$20,000</option>
+                                    </select>
+                                    <div id="life-calc-add-employee-coverage-display" class="calc-premium-display">$0.00</div>
+                                </div>
+
+                                <div class="col-1-4 input-cell">
+                                    <select class="life-calc-select input-control" id="life-calc-add-employee-coverage">
+                                        <option value="0">None</option>
+                                        <option value="5000">$5,000</option>
+                                        <option value="10000">$10,000</option>
+                                    </select>
+                                    <div id="life-calc-add-spouse-coverage-display" class="calc-premium-display">$0.00</div>
+                                </div>
+
+                                <div class="col-1-4 input-cell">
+                                    <select class="life-calc-select input-control" id="life-calc-add-employee-coverage">
+                                        <option value="0">None</option>
+                                        <option value="2000">$2,000</option>
+                                        <option value="4000">$4,000</option>
+                                    </select>
+                                    <div id="life-calc-add-child-coverage-display" class="calc-premium-display">$0.00</div>
+                                </div>
+                            </div>
+
+                            <div class="life-calc-cost-row">
+                                <div class="col-1-4">
+                                    
+                                </div>
+
+                                <div class="col-3-4 text-center">
+                                    Total Monthly Premium: <span id="life-calc-annual-premium-total">$0.00</span>
+                                </div>
+
+                            </div>
+
                        </div>
+
+
+                       <hr>
+
+                       <div class="calc-box">
+                            <div class="calc-col calc-col1">
+                                 <div class="col-header">Employee</div>
+                                <div class="controlbox">
+                                    <div class="label">Annual Salary</div>
+                                    <div class="control"><input></div>
+                                </div>
+                                
+                                <div class="flex-group">
+                                <div class="controlbox">
+                                    <div class="label">Insurance Age</div>
+                                    <div class="control"><input></div>
+                                </div>
+                                
+                                <div class="controlbox">
+                                    <div class="label">Tobacco use in last 12 months?</div>
+                                    <div class="control"><input type="checkbox"></div>
+                                </div>
+                                </div>
+                                
+                                <div class="flex-group">
+                                <div class="controlbox">
+                                    <div class="label">Life Coverage</div>
+                                    <div class="control">
+                                        <select>
+                                            <option value="0">None</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="controlbox">
+                                    <div class="label">AD&amp;D Coverage</div>
+                                    <div class="control">
+                                        <select>
+                                            <option value="0">None</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <div class="calc-col calc-col2">
+                                <div class="col-header">Spouse</div>
+                                
+                                <div><!--test--></div>
+                        
+                                <div class="flex-group">
+                                <div class="controlbox">
+                                    <div class="label">Insurance Age</div>
+                                    <div class="control"><input></div>
+                                </div>
+                                
+                                <div class="controlbox">
+                                    <div class="label">Tobacco use in last 12 months?:</div>
+                                    <div class="control"><input type="checkbox"></div>
+                                </div>
+                                </div>
+                                
+                                <div class="flex-group">
+                                <div class="controlbox">
+                                    <div class="label">Life Coverage</div>
+                                    <div class="control">
+                                        <select>
+                                            <option value="0">None</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="controlbox">
+                                    <div class="label">AD&amp;D Coverage</div>
+                                    <div class="control">
+                                        <select>
+                                            <option value="0">None</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <div class="calc-col calc-col3">
+                                <div class="col-header">Child</div>
+                                
+                                <div>&nbsp;<!--test--></div>
+                                <div>&nbsp;<!--test--></div>
+                                
+                                <div class="flex-group">
+                                <div class="controlbox">
+                                    <div class="label">Life Coverage</div>
+                                    <div class="control">
+                                        <select>
+                                            <option value="0">None</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="controlbox">
+                                    <div class="label">AD&amp;D Coverage</div>
+                                    <div class="control">
+                                        <select>
+                                            <option value="0">None</option>
+                                            <option value="10000">$10,000</option>
+                                            <option value="20000">$20,000</option>
+                                        </select>
+                                        <div>$0.00</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                    </div>
                </main>
            </div>
@@ -204,5 +392,7 @@
        </div>
     </div>
     <script src="scripts/site.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="scripts/calc.js"></script>
 </body>
 </html>

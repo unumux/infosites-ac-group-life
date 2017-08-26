@@ -11,8 +11,118 @@ body {
     margin: 0 auto;
 }
 
-.life-calc-cost-row{
-    display: flex;
-    justify-content: space-between;
+// util
+.text-center{
+    text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
 }
 
+.life-calc-cost-row{
+    display: flex;
+}
+.life-calc-cost-col{
+    //flex: 1 1 0;
+    padding-right: 1rem;
+}
+.life-calc-cost-col1{
+    text-align: right;
+}
+.life-calc-input, .life-calc-select{
+    background-color: lightyellow;
+    //width: 100%;
+    padding: .4rem 1rem;
+}
+.life-calc-select{
+    //background-color: lightyellow;
+    //width: 100%;
+    //padding: .4rem 1rem;
+}
+.col-1-3{
+    flex-basis: 33.33%;
+}
+.col-1-4{
+    flex-basis: 25%;
+}
+.col-1-2{
+    flex-basis: 50%;
+}
+.col-3-4{
+    flex-basis: 75%;
+}
+
+.input-cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.calc-premium-display{
+    flex-basis: 100%;
+    text-align: center;
+}
+.input-control{
+    width: 60%;
+    display: block;
+}
+
+
+
+// new calc ***************
+.calc-col1{    background-color: #ebebeb;    border-top-left-radius: 10px;    border-top-right-radius: 10px;}
+.calc-col2{    
+    background-color: #d1d1d1;
+    background-color: #ebebeb;
+    border-left: 2px #d1d1d1 dashed;
+    border-right: 2px #d1d1d1 dashed;
+    border-top-left-radius: 10px;    
+    border-top-right-radius: 10px;
+}
+@media screen and (max-width: 600px){
+    .calc-col2{
+        background-color: #d1d1d1;
+        border-left: none;
+        border-right: none;
+    }
+}
+.calc-col3{    background-color: #ebebeb;    border-top-left-radius: 10px;    border-top-right-radius: 10px;}
+
+.calc-box{
+    display:flex;
+}
+@media screen and (max-width: 600px){
+    .calc-box{
+        flex-direction: column;
+    }
+}
+.calc-col{
+    display:flex;
+    flex-direction: column;
+    width: 33.33%;
+    text-align:center;
+    & > *{
+        flex-basis: 100%;
+        flex-grow:1;
+    }
+}
+@media screen and (max-width: 600px){
+    .calc-col{
+        width: 100%;
+    }
+}
+.label{
+    margin-top: 2rem;
+}
+.col-header{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-top: 1rem;
+}
+.control input{
+    display: inline-block; // override of willow block style
+}
+// new calc ***************
