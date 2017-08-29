@@ -21,30 +21,6 @@ body {
 .text-right{
     text-align: right;
 }
-/*
-.life-calc-cost-row{
-    display: flex;
-}
-.life-calc-cost-col{
-    //flex: 1 1 0;
-    padding-right: 1rem;
-}
-.life-calc-cost-col1{
-    text-align: right;
-}
-.life-calc-input, .life-calc-select{
-    background-color: lightyellow;
-    //width: 100%;
-    padding: .4rem 1rem;
-}
-.life-calc-select{
-    //background-color: lightyellow;
-    //width: 100%;
-    //padding: .4rem 1rem;
-}
-.col-1-3{
-    flex-basis: 33.33%;
-}*/
 .col-1-4{
     flex-basis: 25%;
 }
@@ -54,82 +30,11 @@ body {
 .col-3-4{
     flex-basis: 75%;
 }
-/*
-.input-cell{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.calc-premium-display{
-    flex-basis: 100%;
-    text-align: center;
-}
-.input-control{
-    width: 60%;
-    display: block;
-}*/
 
-// need calc ##################
-.calc-life-need-box{
-    display: flex;
-    justify-content: center;
+// calc page
+.life-calc-h2{
+    margin-top: 2em;
 }
-.calc-life-need-container{
-    border: 1px dashed #333;
-    border-radius: 10px;
-    padding: 2rem;
-    & input{
-        max-width: 100px;
-        display: inline;
-    }
-}
-.calc-life-need-container input{
-    padding: .4rem 1rem;
-}
-.spacer{
-    margin-bottom: 2rem !important;
-}
-
-.calc-life-debt-box, .calc-life-salary-years-box{
-    display: flex;
-    //justify-content: space-between;
-    flex-wrap: wrap;
-    flex-basis: 33%;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    & > *{
-        flex-basis: 50%;
-    }
-}
-.calc-life-salary-years-box{
-    flex-basis: 20%;
-    & > *{
-        flex-basis: 100%;
-    }
-}
-.calc-life-need-operator{
-    border: none;
-    font-size: 3rem;
-    align-self: center;
-}
-.calc-life-need-col5{
-    flex-basis: 15%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    & > *{
-        flex-basis: 100%;
-    }
-}
-.calc-life-need-recommended-amount{
-    font-size: 3rem;
-}
-// need calc ##################
-
 
 
 // revised need calc +++++++++++

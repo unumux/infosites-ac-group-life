@@ -1,21 +1,13 @@
-//  clean variables                     raw input versions before cleaning
-let employee_annual_salary = 30000; let employee_annual_salary_input = 30000;
-let employee_age = 21;              let employee_age_input = 21;
-let spouse_age = 21;                let spouse_age_input = 21;
-let employee_life_coverage = 0;     let employee_life_coverage_input = 0;
-let spouse_life_coverage = 0;       let spouse_life_coverage_input = 0;
-let child_life_coverage = 0;        let child_life_coverage_input = 0;
-let employee_add_coverage = 0;      let employee_add_coverage_input = 0;
-let spouse_add_coverage = 0;        let spouse_add_coverage_input = 0;
-let child_add_coverage = 0;         let child_add_coverage_input = 0;
-
-$( "#life-calc-annual-salary" ).change(function() {
-    //console.log( "Handler for life-calc-annual-salary .change() called. " + employee_age )
-    //console.log( "employee_annual_salary: " + employee_annual_salary)
-    //console.log( "employee_annual_salary_input: " + employee_annual_salary_input)
-    //employee_annual_salary_input = input2Number(this.value)
-    calc();
-});
+//  variables                     
+let employee_annual_salary = 56516; 
+let employee_age = 21;              
+let spouse_age = 21;                
+let employee_life_coverage = 0;     
+let spouse_life_coverage = 0;       
+let child_life_coverage = 0;        
+let employee_add_coverage = 0;      
+let spouse_add_coverage = 0;        
+let child_add_coverage = 0;         
 
 function getrate(age){
     var ra = new Array(); // 0=eeLife; 1=eeLifeTobacco; 2=eeADD; 3=spLife; 4=spLifeTobacco; 5=spADD; 6=chLife; 7=chADD
@@ -36,6 +28,7 @@ function getrate(age){
         if (age >= 65 && age <= 69){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
         if (age >= 70 && age <= 74){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
         if (age >= 75 ){             ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
+        
     return ra;
 }// end getrate() function
 
@@ -98,6 +91,11 @@ function calc(){
     //console.log("salary input = " + employee_annual_salary_input)
     //console.log("formats to " + myFormatCurrency(employee_annual_salary_input, 1))
 } // end calc()
+
+
+$( "#life-calc-annual-salary" ).change(function() {
+    calc();
+});
 
 
 function input2Number(x){
