@@ -33,14 +33,8 @@ function getrate(age){
 }// end getrate() function
 
 function calc(){
-    // clean all inputs
-    employee_annual_salary = input2Number($('#life-calc-annual-salary').value)
-    employee_age = input2Number($('#life-calc-employee-age').value)
-    spouse_age = input2Number($('#life-calc-spouse-age').value)
-    employee_life_coverage = input2Number($('#life-calc-life-employee-coverage').value)
 
-    var TOB_YN = false;
-    var ADD_YN = true;
+    
     var eeRatesPer = 10000;
     var spRatesPer = 5000;
     var chRatesPer = 2000;
@@ -50,6 +44,7 @@ function calc(){
     var eeLifeInc = 10000;
     var eeEOImax  = 100000;
     
+    
     var spLifeMin = 5000;
     var spLifeMax = 500000;
     var spLifeInc = 5000;
@@ -57,8 +52,7 @@ function calc(){
     var spMaxOfEE = 100; // 100 or 50 (percent)
     var spTOB_YN = false;
     var spUseEErates_YN = false;
-    var spLIFEblock_YN = true; // toggle display of sp Life in calc grid
-    var spADDblock_YN = true;  // toggle display of sp ADD in calc grid
+    
     
     
     var chLifeMin = 2000;
@@ -82,15 +76,74 @@ function calc(){
     var modalDisplay = 12; // modal to convert and display premium as (overridded by modal dropdown, if enabled)
 
 
+    
+
+
+    
+
+
+    // clean all inputs
+    employee_annual_salary = input2Number( $('#life-calc-annual-salary').val() )
+    employee_age = input2Number( $('#life-calc-employee-age').val() )
+    spouse_age = input2Number( $('#life-calc-spouse-age').val() )
+    employee_life_coverage = input2Number( $('#life-calc-life-employee-coverage').val() )
+
+        //document.getElementById("spLIFEblock").style.display = "block";}
+    //else{                 document.getElementById("spLIFEblock").style.display = "none";}
+    
+    /*if (spADDblock_YN){   document.getElementById("spADDblock").style.display = "block";}
+    else{                 document.getElementById("spADDblock").style.display = "none";}
+    
+    if (chLIFEblock_YN){  document.getElementById("chLIFEblock").style.display = "block";}
+    else{                 document.getElementById("chLIFEblock").style.display = "none";}
+    
+    if (chADDblock_YN){   document.getElementById("chADDblock").style.display = "block";}
+    else{                 document.getElementById("chADDblock").style.display = "none";}
+        */
 
     // *** Employee ***
-    rates = getrate(eeage);
+    rates = getrate(employee_age);
     var eeliferate = rates[0];
     var eetobliferate = rates[1];
     var eeaddrate = rates[2];
     //console.log("salary input = " + employee_annual_salary_input)
     //console.log("formats to " + myFormatCurrency(employee_annual_salary_input, 1))
 } // end calc()
+
+function initializeLifeCalculator(){
+    var TOB_YN = false; // toggle display of tobacco questions
+    var ADD_YN = true;  // toggle display of AD&D questions
+    var spDisplayAll_YN = true; // toggle display of entire spouse section
+    var spLIFEblock_YN = true; // toggle display of sp Life in calc grid
+    var spADDblock_YN = true;  // toggle display of sp ADD in calc grid
+    var chDisplayAll_YN = true; // toggle display of entire spouse section
+
+    if (!TOB_YN)        { $('.life-calc-employee-tobacco-block, .life-calc-spouse-tobacco-block').addClass('hideme');}
+    if (!ADD_YN)        { $('.life-calc-employee-add-block, .life-calc-spouse-add-block, .life-calc-child-add-block').addClass('hideme'); }
+    if (!spDisplayAll_YN && chDisplayAll_YN){ // hide spouse but not child
+        $('.life-calc-employee-col').addClass('col-width-50 add-border-right');
+        $('.life-calc-spouse-col').addClass('hideme');
+        $('.life-calc-child-col').addClass('col-width-50');
+    }
+    if (!spLIFEblock_YN){ $('.life-calc-spouse-life-block').toggleClass('hiddenme'); }
+    if (!spADDblock_YN) { $('.life-calc-spouse-add-block').toggleClass('hiddenme'); }
+    if (!chDisplayAll_YN && spDisplayAll_YN){ // hide child but not spouse
+        $('.life-calc-employee-col').addClass('col-width-50');
+        $('.life-calc-spouse-col').addClass('col-width-50');
+        $('.life-calc-child-col').addClass('hideme');
+    }
+    if (!chDisplayAll_YN && !spDisplayAll_YN){ // hide child AND spouse
+        $('.life-calc-employee-col').addClass('col-width-100');
+        $('.life-calc-spouse-col').addClass('hideme');
+        $('.life-calc-child-col').addClass('hideme');
+    }
+    calc();
+}// end initializeLifeCalculator
+
+
+$(document).ready(function() {
+    initializeLifeCalculator();
+});
 
 
 $( "#life-calc-annual-salary" ).change(function() {
@@ -99,6 +152,8 @@ $( "#life-calc-annual-salary" ).change(function() {
 
 
 function input2Number(x){
+    console.log('input2Number x: ' + x)
+    if (x === undefined) {return x;}
     if(x.length == 0){
         x = 0;
     }

@@ -30,6 +30,21 @@ body {
 .col-3-4{
     flex-basis: 75%;
 }
+.hideme{
+    display: none !important;
+}
+.hiddenme{
+    visibility: hidden;
+}
+.calc-box .col-width-50{ // extra specificity needed thus the .calc-box addition
+    width: 50%;
+}
+.calc-box .col-width-100{ // extra specificity needed thus the .calc-box addition
+    width: 100%;
+}
+.add-border-right{
+    border-right: 2px dashed #d1d1d1;
+}
 
 // calc page
 .life-calc-h2{
