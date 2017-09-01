@@ -118,6 +118,20 @@ function initializeLifeCalculator(){
     var spADDblock_YN = true;  // toggle display of sp ADD in calc grid
     var chDisplayAll_YN = true; // toggle display of entire spouse section
 
+    var eeLifeMin = 10000;
+    var eeLifeMax = 500000;
+    var eeLifeInc = 10000;
+    var eeEOImax  = 100000;
+
+    var spLifeMin = 5000;
+    var spLifeMax = 500000;
+    var spLifeInc = 5000;
+    var spEOImax  = 25000;
+
+    var chLifeMin = 2000;
+    var chLifeMax = 10000;
+    var chLifeInc = 2000;
+
     if (!TOB_YN)        { $('.life-calc-employee-tobacco-block, .life-calc-spouse-tobacco-block').addClass('hideme');}
     if (!ADD_YN)        { $('.life-calc-employee-add-block, .life-calc-spouse-add-block, .life-calc-child-add-block').addClass('hideme'); }
     if (!spDisplayAll_YN && chDisplayAll_YN){ // hide spouse but not child
@@ -125,8 +139,8 @@ function initializeLifeCalculator(){
         $('.life-calc-spouse-col').addClass('hideme');
         $('.life-calc-child-col').addClass('col-width-50');
     }
-    if (!spLIFEblock_YN){ $('.life-calc-spouse-life-block').toggleClass('hiddenme'); }
-    if (!spADDblock_YN) { $('.life-calc-spouse-add-block').toggleClass('hiddenme'); }
+    if (!spLIFEblock_YN){ $('.life-calc-spouse-life-block').addClass('hiddenme'); }
+    if (!spADDblock_YN) { $('.life-calc-spouse-add-block').addClass('hiddenme'); }
     if (!chDisplayAll_YN && spDisplayAll_YN){ // hide child but not spouse
         $('.life-calc-employee-col').addClass('col-width-50');
         $('.life-calc-spouse-col').addClass('col-width-50');
@@ -137,6 +151,33 @@ function initializeLifeCalculator(){
         $('.life-calc-spouse-col').addClass('hideme');
         $('.life-calc-child-col').addClass('hideme');
     }
+
+    
+                 populateDD($('#life-calc-life-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc, eeEOImax)
+    if (ADD_YN){ populateDD($('#life-calc-add-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc) }
+
+                 populateDD($('#life-calc-life-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc, spEOImax)
+    if (ADD_YN){ populateDD($('#life-calc-add-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc) }
+
+                 populateDD($('#life-calc-life-child-coverage'), chLifeMin, chLifeMax, chLifeInc)
+    if (ADD_YN){ populateDD($('#life-calc-add-child-coverage'), chLifeMin, chLifeMax, chLifeInc) }
+
+    
+    function populateDD(target, min, max, inc, eoimax){
+        if(isNaN(eoimax)){ eoimax=9999999; }
+        target.html(''); // clear the select
+        target.append($('<option>', { value : 0 }).text('None'));
+        for (var i=min; i <= max; i=i+inc){
+            if (i<=eoimax){ 
+                target.append('<option value="'+i+'">'+myFormatCurrency(i,1)+'</option>');
+            }
+            else{ 
+                target.append('<option value="'+i+'">'+myFormatCurrency(i,1)+ "*"+'</option>');			  
+            }
+        }
+    }// end populateDD()
+    
+
     calc();
 }// end initializeLifeCalculator
 
@@ -152,7 +193,7 @@ $( "#life-calc-annual-salary" ).change(function() {
 
 
 function input2Number(x){
-    console.log('input2Number x: ' + x)
+    //console.log('input2Number x: ' + x)
     if (x === undefined) {return x;}
     if(x.length == 0){
         x = 0;
