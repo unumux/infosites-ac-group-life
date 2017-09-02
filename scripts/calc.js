@@ -11,26 +11,27 @@ let child_add_coverage = 0;
 
 function getrate(age){
     var ra = new Array(); // 0=eeLife; 1=eeLifeTobacco; 2=eeADD; 3=spLife; 4=spLifeTobacco; 5=spADD; 6=chLife; 7=chADD
-    ra[2] = .0;  // ee ADD rate
-    ra[5] = .0;  // sp ADD rate
-    ra[7] = .0;  // ch ADD rate
-    ra[6] = .0;  // ch [Life] rate
+    ra[2] = .34;  // ee ADD rate
+    ra[5] = .35;  // sp ADD rate
+    ra[7] = .36;  // ch ADD rate
+    ra[6] = .74;  // ch [Life] rate
                                 //	 eeLife     eeTob      spLife     spTob
-        if (age <= 24){              ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 25 && age <= 29){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 30 && age <= 34){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 35 && age <= 39){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 40 && age <= 44){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 45 && age <= 49){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 50 && age <= 54){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 55 && age <= 59){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 60 && age <= 64){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 65 && age <= 69){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 70 && age <= 74){ ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
-        if (age >= 75 ){             ra[0]=0.0; ra[1]=0.0; ra[3]=0.0; ra[4]=0.0;}
+        if (age <= 24){              ra[0]=0.10; ra[1]=0.15; ra[3]=0.12; ra[4]=0.22;}
+        if (age >= 25 && age <= 29){ ra[0]=0.20; ra[1]=0.25; ra[3]=0.22; ra[4]=0.32;}
+        if (age >= 30 && age <= 34){ ra[0]=0.30; ra[1]=0.35; ra[3]=0.32; ra[4]=0.42;}
+        if (age >= 35 && age <= 39){ ra[0]=0.40; ra[1]=0.45; ra[3]=0.42; ra[4]=0.52;}
+        if (age >= 40 && age <= 44){ ra[0]=0.50; ra[1]=0.55; ra[3]=0.52; ra[4]=0.62;}
+        if (age >= 45 && age <= 49){ ra[0]=0.60; ra[1]=0.65; ra[3]=0.62; ra[4]=0.72;}
+        if (age >= 50 && age <= 54){ ra[0]=0.70; ra[1]=0.75; ra[3]=0.72; ra[4]=0.82;}
+        if (age >= 55 && age <= 59){ ra[0]=0.80; ra[1]=0.85; ra[3]=0.82; ra[4]=0.92;}
+        if (age >= 60 && age <= 64){ ra[0]=0.90; ra[1]=0.95; ra[3]=0.92; ra[4]=1.02;}
+        if (age >= 65 && age <= 69){ ra[0]=1.10; ra[1]=1.05; ra[3]=1.02; ra[4]=1.12;}
+        if (age >= 70 && age <= 74){ ra[0]=1.20; ra[1]=1.15; ra[3]=1.12; ra[4]=1.22;}
+        if (age >= 75 ){             ra[0]=1.30; ra[1]=1.25; ra[3]=1.22; ra[4]=1.32;}
         
     return ra;
 }// end getrate() function
+
 
 function calc(){
 
@@ -62,7 +63,7 @@ function calc(){
     var chLIFEblock_YN = true; // toggle display of ch Life in calc grid
     var chADDblock_YN = true;  // toggle display of ch Life in calc grid
     
-    var ar1Min = 70;
+    /*var ar1Min = 70;
     var ar1Max = 74;
     var ar1per = .65; // percentage of coverage reduction1
         var ar2Min = 75;
@@ -71,6 +72,31 @@ function calc(){
     var ar3Min = 999;
     var ar3Max = 999;
     var ar3per = .30; // percentage of coverage reduction3 (update #moreThanThreeReductions if adding another)
+    */
+    var ageReduction = [
+                         //{ min: 65, max: 69,  percent: .75 }, 
+                         { min: 70, max: 74,  percent: .65 }, 
+                         { min: 75, max: 79,  percent: .50 }, 
+                         { min: 80, max: 999, percent: .30 },
+                        ];
+    var ageReductionTriggered_YN = false;
+
+    
+
+    function getAgeReductionPercent(age, thearray){
+        var percent = 1.00; // not reduced yet
+        if (age > 999){ age = 999 } // just for error control
+        thearray.forEach(function(item, index, array) {
+            if(age >= item.min && age <= item.max){
+                percent = item.percent;
+                ageReductionTriggered_YN = true;
+            }
+            //console.log(item.min, item.max, item.percent, index);
+        });
+        return percent;
+    }// end getAgeReductionPercent
+
+
     
     var modalRates = 12;   // modal for given rates (monthly=12; semi-monthly=24; biweekly=26; weekly=52)
     var modalDisplay = 12; // modal to convert and display premium as (overridded by modal dropdown, if enabled)
@@ -87,27 +113,42 @@ function calc(){
     employee_age = input2Number( $('#life-calc-employee-age').val() )
     spouse_age = input2Number( $('#life-calc-spouse-age').val() )
     employee_life_coverage = input2Number( $('#life-calc-life-employee-coverage').val() )
+    employee_add_coverage = input2Number( $('#life-calc-add-employee-coverage').val() )
 
-        //document.getElementById("spLIFEblock").style.display = "block";}
-    //else{                 document.getElementById("spLIFEblock").style.display = "none";}
-    
-    /*if (spADDblock_YN){   document.getElementById("spADDblock").style.display = "block";}
-    else{                 document.getElementById("spADDblock").style.display = "none";}
-    
-    if (chLIFEblock_YN){  document.getElementById("chLIFEblock").style.display = "block";}
-    else{                 document.getElementById("chLIFEblock").style.display = "none";}
-    
-    if (chADDblock_YN){   document.getElementById("chADDblock").style.display = "block";}
-    else{                 document.getElementById("chADDblock").style.display = "none";}
-        */
+    // apply age reduction
+    var myAgeReductionPercent = getAgeReductionPercent(employee_age, ageReduction)
+
+    employee_life_coverage = employee_life_coverage * myAgeReductionPercent;
+    employee_add_coverage = employee_add_coverage * myAgeReductionPercent;
+
+    //console.log("myAgeReductionPercent",myAgeReductionPercent)
+    if (ageReductionTriggered_YN){
+        $('.life-calc-age-reduced-box').removeClass('hideme')
+        $('.life-calc-age-reduced-percent-display').html(myAgeReductionPercent*100 + '%')
+        $('#life-calc-employee-age-reduced-life-coverage-display').html(myFormatCurrency(employee_life_coverage,1))
+        $('#life-calc-employee-age-reduced-add-coverage-display').html(myFormatCurrency(employee_add_coverage,1))
+    }
+    else{
+        $('.life-calc-age-reduced-box').addClass('hideme')
+    }
 
     // *** Employee ***
     rates = getrate(employee_age);
-    var eeliferate = rates[0];
-    var eetobliferate = rates[1];
-    var eeaddrate = rates[2];
-    //console.log("salary input = " + employee_annual_salary_input)
-    //console.log("formats to " + myFormatCurrency(employee_annual_salary_input, 1))
+    var eeliferate      = rates[0];
+    var eetobliferate   = rates[1];
+    var eeaddrate       = rates[2];
+
+    //console.log("employee_life_coverage", employee_life_coverage, "eeliferate", eeliferate)
+    var eeLIFEprem = employee_life_coverage/eeRatesPer*eeliferate*modalRates/modalDisplay;
+    var eeADDprem = employee_add_coverage/eeRatesPer*eeaddrate*modalRates/modalDisplay;
+    console.log("eeADDprem",eeADDprem)
+    //var eeADDprem = eeADDcov/eeRatesPer*eeaddrate*modalRates/modalDisplay;
+    //console.log("employee_life_coverage: " + employee_life_coverage)
+    //console.log("eeliferate: " + eeliferate)
+    //console.log("eeLIFEprem: " + eeLIFEprem)
+    $('#life-calc-life-employee-coverage-display').html( myFormatCurrency(eeLIFEprem,2));
+    $('#life-calc-add-employee-coverage-display').html( myFormatCurrency(eeADDprem,2));
+    //document.getElementById("eeADDprem").innerHTML = formatCurrency(roundToNearestPenny(eeADDprem),1);
 } // end calc()
 
 function initializeLifeCalculator(){
@@ -187,9 +228,10 @@ $(document).ready(function() {
 });
 
 
-$( "#life-calc-annual-salary" ).change(function() {
+$( ".activates-calc" ).change(function() {
     calc();
 });
+
 
 
 function input2Number(x){
@@ -254,3 +296,13 @@ function myFormatCurrency(num, options) {
         return (((sign)?'':'-') + '$' + num + '.' + cents);
     }
 }// end myFormatCurrency function
+
+function roundToNearestPenny(dollarAmt) { 
+    // converted to pennies
+    var dollarAmt = (dollarAmt * 100);
+    // rounded
+    var dollarAmt = Math.round(dollarAmt);
+    // and back to dollars again
+    var dollarAmt = (dollarAmt / 100);
+	return dollarAmt;
+}

@@ -183,5 +183,11 @@ body {
     //background-color: lightyellow;
     //width: 100%;
     padding: .4rem 1rem;
+    width: 130px;  //https://stackoverflow.com/questions/10672586/how-to-make-select-elements-shrink-to-max-width-percent-style-within-fieldset
+    max-width: 130px;
 }
+.life-calc-premium-display{
+    font-weight: bold;
+}
+
 // new calc ***************
