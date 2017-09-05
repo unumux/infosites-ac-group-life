@@ -7,7 +7,9 @@ let spouse_life_coverage = 0;
 let child_life_coverage = 0;        
 let employee_add_coverage = 0;      
 let spouse_add_coverage = 0;        
-let child_add_coverage = 0;         
+let child_add_coverage = 0; 
+//let employee_tobacco_YN = true; 
+//let spouse_tobacco_YN = true;        
 
 function getrate(age){
     var ra = new Array(); // 0=eeLife; 1=eeLifeTobacco; 2=eeADD; 3=spLife; 4=spLifeTobacco; 5=spADD; 6=chLife; 7=chADD
@@ -15,7 +17,7 @@ function getrate(age){
     ra[5] = .35;  // sp ADD rate
     ra[7] = .36;  // ch ADD rate
     ra[6] = .74;  // ch [Life] rate
-                                //	 eeLife     eeTob      spLife     spTob
+                                //	 eeLife      eeTob       spLife      spTob
         if (age <= 24){              ra[0]=0.10; ra[1]=0.15; ra[3]=0.12; ra[4]=0.22;}
         if (age >= 25 && age <= 29){ ra[0]=0.20; ra[1]=0.25; ra[3]=0.22; ra[4]=0.32;}
         if (age >= 30 && age <= 34){ ra[0]=0.30; ra[1]=0.35; ra[3]=0.32; ra[4]=0.42;}
@@ -44,14 +46,15 @@ function calc(){
     var eeLifeMax = 500000;
     var eeLifeInc = 10000;
     var eeEOImax  = 100000;
+    var eeXSalaryMax = 5;
     
     
     var spLifeMin = 5000;
     var spLifeMax = 500000;
     var spLifeInc = 5000;
     var spEOImax  = 25000;
-    var spMaxOfEE = 100; // 100 or 50 (percent)
-    var spTOB_YN = false;
+    var spMaxOfEE = 50; // 100 or 50 (percent)
+    var spTOB_YN = true;
     var spUseEErates_YN = false;
     
     
@@ -59,22 +62,12 @@ function calc(){
     var chLifeMin = 2000;
     var chLifeMax = 10000;
     var chLifeInc = 2000;
-    var chMaxOfEE = 100; // 100 or 50 (percent)
+    var chMaxOfEE = 50; // 100 or 50 (percent)
     var chLIFEblock_YN = true; // toggle display of ch Life in calc grid
     var chADDblock_YN = true;  // toggle display of ch Life in calc grid
     
-    /*var ar1Min = 70;
-    var ar1Max = 74;
-    var ar1per = .65; // percentage of coverage reduction1
-        var ar2Min = 75;
-        var ar2Max = 999;
-        var ar2per = .50; // percentage of coverage reduction2
-    var ar3Min = 999;
-    var ar3Max = 999;
-    var ar3per = .30; // percentage of coverage reduction3 (update #moreThanThreeReductions if adding another)
-    */
-    var ageReduction = [
-                         //{ min: 65, max: 69,  percent: .75 }, 
+
+    var ageReduction =  [
                          { min: 70, max: 74,  percent: .65 }, 
                          { min: 75, max: 79,  percent: .50 }, 
                          { min: 80, max: 999, percent: .30 },
@@ -102,24 +95,36 @@ function calc(){
     var modalDisplay = 12; // modal to convert and display premium as (overridded by modal dropdown, if enabled)
 
 
-    
+    var useModalDropdown = false;
+    if (useModalDropdown){
+      $('#modalDD').removeClass('hideme');
+      $('#modalNormalDesc').addClass('hideme');
+      modalDisplay = document.getElementById("modalDD").value;
+    }
 
 
-    
+    $('.calc-box-eoi').addClass('hideme') // reset to hidden
+    var eoi_triggered_YN = false;
 
 
     // clean all inputs
     employee_annual_salary = input2Number( $('#life-calc-annual-salary').val() )
     employee_age = input2Number( $('#life-calc-employee-age').val() )
-    spouse_age = input2Number( $('#life-calc-spouse-age').val() )
     employee_life_coverage = input2Number( $('#life-calc-life-employee-coverage').val() )
     employee_add_coverage = input2Number( $('#life-calc-add-employee-coverage').val() )
+        spouse_age = input2Number( $('#life-calc-spouse-age').val() )
+        spouse_life_coverage = input2Number( $('#life-calc-life-spouse-coverage').val() )
+        spouse_add_coverage = input2Number( $('#life-calc-add-spouse-coverage').val() )
+    child_life_coverage = input2Number( $('#life-calc-life-child-coverage').val() )
+    child_add_coverage = input2Number( $('#life-calc-add-child-coverage').val() )
 
     // apply age reduction
     var myAgeReductionPercent = getAgeReductionPercent(employee_age, ageReduction)
 
     employee_life_coverage = employee_life_coverage * myAgeReductionPercent;
     employee_add_coverage = employee_add_coverage * myAgeReductionPercent;
+    spouse_life_coverage = spouse_life_coverage * myAgeReductionPercent;
+    spouse_add_coverage = spouse_add_coverage * myAgeReductionPercent;
 
     //console.log("myAgeReductionPercent",myAgeReductionPercent)
     if (ageReductionTriggered_YN){
@@ -127,6 +132,8 @@ function calc(){
         $('.life-calc-age-reduced-percent-display').html(myAgeReductionPercent*100 + '%')
         $('#life-calc-employee-age-reduced-life-coverage-display').html(myFormatCurrency(employee_life_coverage,1))
         $('#life-calc-employee-age-reduced-add-coverage-display').html(myFormatCurrency(employee_add_coverage,1))
+        $('#life-calc-spouse-age-reduced-life-coverage-display').html(myFormatCurrency(spouse_life_coverage,1))
+        $('#life-calc-spouse-age-reduced-add-coverage-display').html(myFormatCurrency(spouse_add_coverage,1))
     }
     else{
         $('.life-calc-age-reduced-box').addClass('hideme')
@@ -135,24 +142,146 @@ function calc(){
     // *** Employee ***
     rates = getrate(employee_age);
     var eeliferate      = rates[0];
-    var eetobliferate   = rates[1];
+    var eetobliferate   = rates[1];  
     var eeaddrate       = rates[2];
+    
+    if ( $('#life-calc-employee-tobaccoYN').is(':checked') ){
+        eeliferate = eetobliferate;
+    }
 
-    //console.log("employee_life_coverage", employee_life_coverage, "eeliferate", eeliferate)
+    // add 5x sal cap
+    var eeXsal = eeXSalaryMax*employee_annual_salary/eeLifeInc;eeXsal=Math.ceil(eeXsal);eeXsal=eeXsal*eeLifeInc;
+    if (employee_life_coverage>eeXsal){
+        alert('Employee Life coverage maximum cap applied.\n('+eeXSalaryMax+'x Salary rounds to '+myFormatCurrency(eeXsal,1)+')');
+        // loop through the select to select the closest value
+        var myselect=document.getElementById("life-calc-life-employee-coverage");
+        for (var i=0; i<myselect.options.length; i++){
+            if (myselect.options[i].value<=eeXsal){
+                myselect.selectedIndex=i;
+            }
+        }
+    }
+    employee_life_coverage=input2Number( $('#life-calc-life-employee-coverage').val() )
+
+    if (employee_add_coverage>eeXsal){
+        alert('Employee AD&D coverage maximum cap applied.\n('+eeXSalaryMax+'x Salary rounds to '+myFormatCurrency(eeXsal,1)+')');
+        // loop through the select to select the closest value
+        var myselect=document.getElementById("life-calc-add-employee-coverage");
+        for (var i=0; i<myselect.options.length; i++){
+            if (myselect.options[i].value<=eeXsal){
+                myselect.selectedIndex=i;
+            }
+        }
+    }
+    employee_add_coverage=input2Number( $('#life-calc-add-employee-coverage').val() )
+
+    if (employee_life_coverage >= eeEOImax){
+        eoi_triggered_YN = true;
+    }
+
     var eeLIFEprem = employee_life_coverage/eeRatesPer*eeliferate*modalRates/modalDisplay;
     var eeADDprem = employee_add_coverage/eeRatesPer*eeaddrate*modalRates/modalDisplay;
-    console.log("eeADDprem",eeADDprem)
-    //var eeADDprem = eeADDcov/eeRatesPer*eeaddrate*modalRates/modalDisplay;
-    //console.log("employee_life_coverage: " + employee_life_coverage)
-    //console.log("eeliferate: " + eeliferate)
-    //console.log("eeLIFEprem: " + eeLIFEprem)
+
     $('#life-calc-life-employee-coverage-display').html( myFormatCurrency(eeLIFEprem,2));
     $('#life-calc-add-employee-coverage-display').html( myFormatCurrency(eeADDprem,2));
-    //document.getElementById("eeADDprem").innerHTML = formatCurrency(roundToNearestPenny(eeADDprem),1);
+
+
+
+    // *** Spouse ***
+    rates = getrate(spouse_age);
+    var spliferate      = rates[3];
+    var sptobliferate   = rates[4];  
+    var spaddrate       = rates[5];
+    
+    if ( $('#life-calc-spouse-tobaccoYN').is(':checked') ){
+        spliferate = sptobliferate;
+    }
+
+    var eeFactor = spMaxOfEE/100; // convert to decimal equavalent for easy percentage multiplication
+    if (spouse_life_coverage > employee_life_coverage*eeFactor){
+        alert('Spouse Life coverage can not exceed ' + spMaxOfEE + '% (' + myFormatCurrency(employee_life_coverage*eeFactor,1) + ') of employee Life coverage.');
+        // loop through the select to select the closest value
+        var myselect=document.getElementById("life-calc-life-spouse-coverage");
+        for (var i=0; i<myselect.options.length; i++){
+            if (myselect.options[i].value<=employee_life_coverage*eeFactor){
+                myselect.selectedIndex=i;
+            }
+        }
+    }
+    spouse_life_coverage=input2Number( $('#life-calc-life-spouse-coverage').val() )
+
+    if (spouse_add_coverage > employee_add_coverage*eeFactor){
+        alert('Spouse AD&D coverage can not exceed ' + spMaxOfEE + '% (' + myFormatCurrency(employee_add_coverage*eeFactor,1) + ') of employee AD&D coverage.');
+        // loop through the select to select the closest value
+        var myselect=document.getElementById("life-calc-add-spouse-coverage");
+        for (var i=0; i<myselect.options.length; i++){
+            if (myselect.options[i].value<=employee_add_coverage*eeFactor){
+                myselect.selectedIndex=i;
+            }
+        }
+    }
+    spouse_add_coverage=input2Number( $('#life-calc-add-spouse-coverage').val() )
+
+    if (spouse_life_coverage >= spEOImax){
+        eoi_triggered_YN = true;
+    }
+
+    var spLIFEprem = spouse_life_coverage/spRatesPer*spliferate*modalRates/modalDisplay;
+    var spADDprem = spouse_add_coverage/spRatesPer*spaddrate*modalRates/modalDisplay;
+
+    $('#life-calc-life-spouse-coverage-display').html( myFormatCurrency(spLIFEprem,2));
+    $('#life-calc-add-spouse-coverage-display').html( myFormatCurrency(spADDprem,2));
+
+
+    // *** Child ***
+    var chliferate      = rates[6]; 
+    var chaddrate       = rates[7];
+
+    var eeFactor = chMaxOfEE/100; // convert to decimal equavalent for easy percentage multiplication
+    if (child_life_coverage > employee_life_coverage*eeFactor){
+        alert('Child Life coverage can not exceed ' + chMaxOfEE + '% (' + myFormatCurrency(employee_life_coverage*eeFactor,1) + ') of employee Life coverage.');
+        // loop through the select to select the closest value
+        var myselect=document.getElementById("life-calc-life-child-coverage");
+        for (var i=0; i<myselect.options.length; i++){
+            if (myselect.options[i].value<=employee_life_coverage*eeFactor){
+                myselect.selectedIndex=i;
+            }
+        }
+    }
+    child_life_coverage=input2Number( $('#life-calc-life-child-coverage').val() )
+
+    if (child_add_coverage > employee_add_coverage*eeFactor){
+        alert('Child AD&D coverage can not exceed ' + chMaxOfEE + '% (' + myFormatCurrency(employee_add_coverage*eeFactor,1) + ') of employee AD&D coverage.');
+        // loop through the select to select the closest value
+        var myselect=document.getElementById("life-calc-add-child-coverage");
+        for (var i=0; i<myselect.options.length; i++){
+            if (myselect.options[i].value<=employee_add_coverage*eeFactor){
+                myselect.selectedIndex=i;
+            }
+        }
+    }
+    child_add_coverage=input2Number( $('#life-calc-add-child-coverage').val() )
+
+    var chLIFEprem = child_life_coverage/chRatesPer*chliferate*modalRates/modalDisplay;
+    var chADDprem = child_add_coverage/chRatesPer*chaddrate*modalRates/modalDisplay;
+
+    $('#life-calc-life-child-coverage-display').html( myFormatCurrency(chLIFEprem,2));
+    $('#life-calc-add-child-coverage-display').html( myFormatCurrency(chADDprem,2));
+
+
+    // *** total ***
+    var totalPremium = eeLIFEprem + eeADDprem + spLIFEprem + spADDprem + chLIFEprem + chADDprem;
+    $('#life-calc-total-premium-display').html( myFormatCurrency(totalPremium,2));
+
+    // eoi
+    if (eoi_triggered_YN){
+        $('.calc-box-eoi').removeClass('hideme')
+    }
+
 } // end calc()
 
 function initializeLifeCalculator(){
-    var TOB_YN = false; // toggle display of tobacco questions
+    var TOB_YN = true; // toggle display of tobacco questions
     var ADD_YN = true;  // toggle display of AD&D questions
     var spDisplayAll_YN = true; // toggle display of entire spouse section
     var spLIFEblock_YN = true; // toggle display of sp Life in calc grid
@@ -297,12 +426,35 @@ function myFormatCurrency(num, options) {
     }
 }// end myFormatCurrency function
 
-function roundToNearestPenny(dollarAmt) { 
-    // converted to pennies
-    var dollarAmt = (dollarAmt * 100);
-    // rounded
-    var dollarAmt = Math.round(dollarAmt);
-    // and back to dollars again
-    var dollarAmt = (dollarAmt / 100);
-	return dollarAmt;
+
+
+
+// need calc begin
+$( ".activates-need-calc" ).change(function() {
+    needCalc();
+});
+$( "#calc-life-need-salary" ).change(function() {
+    var incoming = input2Number( $('#calc-life-need-salary').val() );
+    var outgoing = myFormatCurrency(incoming,1);
+    $('#life-calc-annual-salary').val( outgoing );
+    initializeLifeCalculator();
+});
+$( "#life-calc-annual-salary" ).change(function() {
+    var incoming = input2Number( $('#life-calc-annual-salary').val() );
+    var outgoing = myFormatCurrency(incoming,1);
+    $('#calc-life-need-salary').val( outgoing );
+    needCalc();
+});
+
+function needCalc(){
+    var needDebt1 = input2Number( $('#calc-life-need-debt1').val() );   $('#calc-life-need-debt1').val( myFormatCurrency(needDebt1 ,1) );
+    var needDebt2 = input2Number( $('#calc-life-need-debt2').val() );   $('#calc-life-need-debt2').val( myFormatCurrency(needDebt2 ,1) );
+    var needDebt3 = input2Number( $('#calc-life-need-debt3').val() );   $('#calc-life-need-debt3').val( myFormatCurrency(needDebt3 ,1) );
+    var needDebt4 = input2Number( $('#calc-life-need-debt4').val() );   $('#calc-life-need-debt4').val( myFormatCurrency(needDebt4 ,1) );
+    var needSalary = input2Number( $('#calc-life-need-salary').val() ); $('#calc-life-need-salary').val( myFormatCurrency(needSalary ,1) );
+    var needYears = input2Number( $('#calc-life-need-years').val() );   $('#calc-life-need-years').val( needYears );
+
+    var needTotal = needDebt1 + needDebt2 + needDebt3 + needDebt4 + (needSalary*needYears)
+    $('.calc-life-need-recommended-amount').html( myFormatCurrency(needTotal,1));
 }
+// need calc end

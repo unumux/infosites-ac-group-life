@@ -178,6 +178,13 @@ body {
     background-color: #ebebeb;
     padding: 2rem;
     border-top: 2px solid #d1d1d1;
+    font-size: 2rem;
+}
+.calc-box-eoi{
+    text-align: center;
+    background-color: #ebebeb;
+    padding: 2rem;
+    border-top: 2px solid #d1d1d1;
 }
 .control input, .control select{
     //background-color: lightyellow;
@@ -185,6 +192,10 @@ body {
     padding: .4rem 1rem;
     width: 130px;  //https://stackoverflow.com/questions/10672586/how-to-make-select-elements-shrink-to-max-width-percent-style-within-fieldset
     max-width: 130px;
+}
+.control input[type=checkbox]{
+    width: auto;
+    max-width: auto;
 }
 .life-calc-premium-display{
     font-weight: bold;
