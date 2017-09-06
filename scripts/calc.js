@@ -9,7 +9,50 @@ let employee_add_coverage = 0;
 let spouse_add_coverage = 0;        
 let child_add_coverage = 0; 
 //let employee_tobacco_YN = true; 
-//let spouse_tobacco_YN = true;        
+//let spouse_tobacco_YN = true;   
+
+let eeRatesPer = 10000;
+let spRatesPer = 5000;
+let chRatesPer = 2000;
+
+let eeLifeMin = 10000;
+let eeLifeMax = 500000;
+let eeLifeInc = 10000;
+let eeEOImax  = 100000;
+let eeXSalaryMax = 5;
+
+let spLifeMin = 5000;
+let spLifeMax = 500000;
+let spLifeInc = 5000;
+let spEOImax  = 25000;
+let spMaxOfEE = 50; // 100 or 50 (percent)
+let spTOB_YN = true;
+let spUseEErates_YN = false;
+
+let chLifeMin = 2000;
+let chLifeMax = 10000;
+let chLifeInc = 2000;
+let chMaxOfEE = 50; // 100 or 50 (percent)
+let chLIFEblock_YN = true; // toggle display of ch Life in calc grid
+let chADDblock_YN = true;  // toggle display of ch Life in calc grid
+
+
+let ageReduction =  [
+                     { min: 70, max: 74,  percent: .65 }, 
+                     { min: 75, max: 79,  percent: .50 }, 
+                     { min: 80, max: 999, percent: .30 },
+                    ];
+var modalRates = 12;   // modal for given rates (monthly=12; semi-monthly=24; biweekly=26; weekly=52)
+var modalDisplay = 12; // modal to convert and display premium as (overridded by modal dropdown, if enabled)
+var useModalDropdown = false;
+
+var TOB_YN = true; // toggle display of tobacco questions
+var ADD_YN = true;  // toggle display of AD&D questions
+var spDisplayAll_YN = true; // toggle display of entire spouse section
+var spLIFEblock_YN = true; // toggle display of sp Life in calc grid
+var spADDblock_YN = true;  // toggle display of sp ADD in calc grid
+var chDisplayAll_YN = true; // toggle display of entire spouse section
+
 
 function getrate(age){
     var ra = new Array(); // 0=eeLife; 1=eeLifeTobacco; 2=eeADD; 3=spLife; 4=spLifeTobacco; 5=spADD; 6=chLife; 7=chADD
@@ -35,46 +78,82 @@ function getrate(age){
 }// end getrate() function
 
 
+function initializeLifeCalculator(){
+    if (!TOB_YN)        { $('.life-calc-employee-tobacco-block, .life-calc-spouse-tobacco-block').addClass('hideme');}
+    if (!ADD_YN)        { $('.life-calc-employee-add-block, .life-calc-spouse-add-block, .life-calc-child-add-block').addClass('hideme'); }
+    if (!spDisplayAll_YN && chDisplayAll_YN){ // hide spouse but not child 
+        $('.life-calc-employee-col').addClass('col-width-50 add-border-right');
+        $('.life-calc-spouse-col').addClass('hideme');
+        $('.life-calc-child-col').addClass('col-width-50');
+    }
+    if (!spLIFEblock_YN){ $('.life-calc-spouse-life-block').addClass('hiddenme'); }
+    if (!spADDblock_YN) { $('.life-calc-spouse-add-block').addClass('hiddenme'); }
+    if (!chDisplayAll_YN && spDisplayAll_YN){ // hide child but not spouse
+        $('.life-calc-employee-col').addClass('col-width-50');
+        $('.life-calc-spouse-col').addClass('col-width-50');
+        $('.life-calc-child-col').addClass('hideme');
+    }
+    if (!chDisplayAll_YN && !spDisplayAll_YN){ // hide child AND spouse
+        $('.life-calc-employee-col').addClass('col-width-100');
+        $('.life-calc-spouse-col').addClass('hideme');
+        $('.life-calc-child-col').addClass('hideme');
+    }
+
+    
+                    populateDD($('#life-calc-life-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc, eeEOImax)
+    if (ADD_YN){ populateDD($('#life-calc-add-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc) }
+
+                    populateDD($('#life-calc-life-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc, spEOImax)
+    if (ADD_YN){ populateDD($('#life-calc-add-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc) }
+
+                    populateDD($('#life-calc-life-child-coverage'), chLifeMin, chLifeMax, chLifeInc)
+    if (ADD_YN){ populateDD($('#life-calc-add-child-coverage'), chLifeMin, chLifeMax, chLifeInc) }
+
+    
+    function populateDD(target, min, max, inc, eoimax){
+        if(isNaN(eoimax)){ eoimax=9999999; }
+        target.html(''); // clear the select
+        target.append($('<option>', { value : 0 }).text('None'));
+        for (var i=min; i <= max; i=i+inc){
+            if (i<=eoimax){ 
+                target.append('<option value="'+i+'">'+myFormatCurrency(i,1)+'</option>');
+            }
+            else{ 
+                target.append('<option value="'+i+'">'+myFormatCurrency(i,1)+ "*"+'</option>');			  
+            }
+        }
+    }// end populateDD()
+
+    if (useModalDropdown){
+        $('#modalDD').removeClass('hideme');
+        $('#modalNormalDesc').addClass('hideme');
+        modalDisplay = document.getElementById("modalDD").value;
+    }
+    
+
+    calc();
+}// end initializeLifeCalculator
+
+
 function calc(){
-
-    
-    var eeRatesPer = 10000;
-    var spRatesPer = 5000;
-    var chRatesPer = 2000;
-    
-    var eeLifeMin = 10000;
-    var eeLifeMax = 500000;
-    var eeLifeInc = 10000;
-    var eeEOImax  = 100000;
-    var eeXSalaryMax = 5;
-    
-    
-    var spLifeMin = 5000;
-    var spLifeMax = 500000;
-    var spLifeInc = 5000;
-    var spEOImax  = 25000;
-    var spMaxOfEE = 50; // 100 or 50 (percent)
-    var spTOB_YN = true;
-    var spUseEErates_YN = false;
-    
-    
-    
-    var chLifeMin = 2000;
-    var chLifeMax = 10000;
-    var chLifeInc = 2000;
-    var chMaxOfEE = 50; // 100 or 50 (percent)
-    var chLIFEblock_YN = true; // toggle display of ch Life in calc grid
-    var chADDblock_YN = true;  // toggle display of ch Life in calc grid
-    
-
-    var ageReduction =  [
-                         { min: 70, max: 74,  percent: .65 }, 
-                         { min: 75, max: 79,  percent: .50 }, 
-                         { min: 80, max: 999, percent: .30 },
-                        ];
     var ageReductionTriggered_YN = false;
 
-    
+    $('.calc-box-eoi').addClass('hideme') // reset to hidden
+    var eoi_triggered_YN = false;
+
+    // clean all inputs
+    employee_annual_salary = input2Number( $('#life-calc-annual-salary').val() )
+    employee_age = input2Number( $('#life-calc-employee-age').val() )
+    employee_life_coverage = input2Number( $('#life-calc-life-employee-coverage').val() )
+    employee_add_coverage = input2Number( $('#life-calc-add-employee-coverage').val() )
+    spouse_age = input2Number( $('#life-calc-spouse-age').val() )
+    spouse_life_coverage = input2Number( $('#life-calc-life-spouse-coverage').val() )
+    spouse_add_coverage = input2Number( $('#life-calc-add-spouse-coverage').val() )
+    child_life_coverage = input2Number( $('#life-calc-life-child-coverage').val() )
+    child_add_coverage = input2Number( $('#life-calc-add-child-coverage').val() )
+
+    // apply age reduction
+    var myAgeReductionPercent = getAgeReductionPercent(employee_age, ageReduction)
 
     function getAgeReductionPercent(age, thearray){
         var percent = 1.00; // not reduced yet
@@ -84,49 +163,15 @@ function calc(){
                 percent = item.percent;
                 ageReductionTriggered_YN = true;
             }
-            //console.log(item.min, item.max, item.percent, index);
         });
         return percent;
     }// end getAgeReductionPercent
-
-
-    
-    var modalRates = 12;   // modal for given rates (monthly=12; semi-monthly=24; biweekly=26; weekly=52)
-    var modalDisplay = 12; // modal to convert and display premium as (overridded by modal dropdown, if enabled)
-
-
-    var useModalDropdown = false;
-    if (useModalDropdown){
-      $('#modalDD').removeClass('hideme');
-      $('#modalNormalDesc').addClass('hideme');
-      modalDisplay = document.getElementById("modalDD").value;
-    }
-
-
-    $('.calc-box-eoi').addClass('hideme') // reset to hidden
-    var eoi_triggered_YN = false;
-
-
-    // clean all inputs
-    employee_annual_salary = input2Number( $('#life-calc-annual-salary').val() )
-    employee_age = input2Number( $('#life-calc-employee-age').val() )
-    employee_life_coverage = input2Number( $('#life-calc-life-employee-coverage').val() )
-    employee_add_coverage = input2Number( $('#life-calc-add-employee-coverage').val() )
-        spouse_age = input2Number( $('#life-calc-spouse-age').val() )
-        spouse_life_coverage = input2Number( $('#life-calc-life-spouse-coverage').val() )
-        spouse_add_coverage = input2Number( $('#life-calc-add-spouse-coverage').val() )
-    child_life_coverage = input2Number( $('#life-calc-life-child-coverage').val() )
-    child_add_coverage = input2Number( $('#life-calc-add-child-coverage').val() )
-
-    // apply age reduction
-    var myAgeReductionPercent = getAgeReductionPercent(employee_age, ageReduction)
 
     employee_life_coverage = employee_life_coverage * myAgeReductionPercent;
     employee_add_coverage = employee_add_coverage * myAgeReductionPercent;
     spouse_life_coverage = spouse_life_coverage * myAgeReductionPercent;
     spouse_add_coverage = spouse_add_coverage * myAgeReductionPercent;
 
-    //console.log("myAgeReductionPercent",myAgeReductionPercent)
     if (ageReductionTriggered_YN){
         $('.life-calc-age-reduced-box').removeClass('hideme')
         $('.life-calc-age-reduced-percent-display').html(myAgeReductionPercent*100 + '%')
@@ -267,6 +312,7 @@ function calc(){
 
     $('#life-calc-life-child-coverage-display').html( myFormatCurrency(chLIFEprem,2));
     $('#life-calc-add-child-coverage-display').html( myFormatCurrency(chADDprem,2));
+    console.log('chADDprem',chADDprem)
 
 
     // *** total ***
@@ -280,76 +326,7 @@ function calc(){
 
 } // end calc()
 
-function initializeLifeCalculator(){
-    var TOB_YN = true; // toggle display of tobacco questions
-    var ADD_YN = true;  // toggle display of AD&D questions
-    var spDisplayAll_YN = true; // toggle display of entire spouse section
-    var spLIFEblock_YN = true; // toggle display of sp Life in calc grid
-    var spADDblock_YN = true;  // toggle display of sp ADD in calc grid
-    var chDisplayAll_YN = true; // toggle display of entire spouse section
 
-    var eeLifeMin = 10000;
-    var eeLifeMax = 500000;
-    var eeLifeInc = 10000;
-    var eeEOImax  = 100000;
-
-    var spLifeMin = 5000;
-    var spLifeMax = 500000;
-    var spLifeInc = 5000;
-    var spEOImax  = 25000;
-
-    var chLifeMin = 2000;
-    var chLifeMax = 10000;
-    var chLifeInc = 2000;
-
-    if (!TOB_YN)        { $('.life-calc-employee-tobacco-block, .life-calc-spouse-tobacco-block').addClass('hideme');}
-    if (!ADD_YN)        { $('.life-calc-employee-add-block, .life-calc-spouse-add-block, .life-calc-child-add-block').addClass('hideme'); }
-    if (!spDisplayAll_YN && chDisplayAll_YN){ // hide spouse but not child
-        $('.life-calc-employee-col').addClass('col-width-50 add-border-right');
-        $('.life-calc-spouse-col').addClass('hideme');
-        $('.life-calc-child-col').addClass('col-width-50');
-    }
-    if (!spLIFEblock_YN){ $('.life-calc-spouse-life-block').addClass('hiddenme'); }
-    if (!spADDblock_YN) { $('.life-calc-spouse-add-block').addClass('hiddenme'); }
-    if (!chDisplayAll_YN && spDisplayAll_YN){ // hide child but not spouse
-        $('.life-calc-employee-col').addClass('col-width-50');
-        $('.life-calc-spouse-col').addClass('col-width-50');
-        $('.life-calc-child-col').addClass('hideme');
-    }
-    if (!chDisplayAll_YN && !spDisplayAll_YN){ // hide child AND spouse
-        $('.life-calc-employee-col').addClass('col-width-100');
-        $('.life-calc-spouse-col').addClass('hideme');
-        $('.life-calc-child-col').addClass('hideme');
-    }
-
-    
-                 populateDD($('#life-calc-life-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc, eeEOImax)
-    if (ADD_YN){ populateDD($('#life-calc-add-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc) }
-
-                 populateDD($('#life-calc-life-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc, spEOImax)
-    if (ADD_YN){ populateDD($('#life-calc-add-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc) }
-
-                 populateDD($('#life-calc-life-child-coverage'), chLifeMin, chLifeMax, chLifeInc)
-    if (ADD_YN){ populateDD($('#life-calc-add-child-coverage'), chLifeMin, chLifeMax, chLifeInc) }
-
-    
-    function populateDD(target, min, max, inc, eoimax){
-        if(isNaN(eoimax)){ eoimax=9999999; }
-        target.html(''); // clear the select
-        target.append($('<option>', { value : 0 }).text('None'));
-        for (var i=min; i <= max; i=i+inc){
-            if (i<=eoimax){ 
-                target.append('<option value="'+i+'">'+myFormatCurrency(i,1)+'</option>');
-            }
-            else{ 
-                target.append('<option value="'+i+'">'+myFormatCurrency(i,1)+ "*"+'</option>');			  
-            }
-        }
-    }// end populateDD()
-    
-
-    calc();
-}// end initializeLifeCalculator
 
 
 $(document).ready(function() {
@@ -364,7 +341,6 @@ $( ".activates-calc" ).change(function() {
 
 
 function input2Number(x){
-    //console.log('input2Number x: ' + x)
     if (x === undefined) {return x;}
     if(x.length == 0){
         x = 0;
@@ -373,15 +349,6 @@ function input2Number(x){
         x = x.replace(/\D/g,'')*1;
     }
     return x
-}
-
-function getPayPeriodDesc(x){
-    if(x==1){return "Annual"}
-    if(x==12){return "Monthly"}
-    if(x==24){return "Semi-Monthly"}
-    if(x==26){return "Bi-Weekly"}
-    if(x==52){return "Weekly"}
-    else{return x+"thly"}
 }
 
 function myFormatCurrency(num, options) {
@@ -408,6 +375,8 @@ function myFormatCurrency(num, options) {
 
     var realcents = (numOrig % 1)
     var cents = realcents * 100;
+        cents = Math.round10(cents, -2); // new addition to better handle JavaScript floating number handling
+
     var centsNormalRound = Math.round(cents);
     var centsRoundedUp = Math.ceil(cents);
     if (roundUpYN === 1){ cents = centsRoundedUp }
@@ -424,8 +393,60 @@ function myFormatCurrency(num, options) {
     if (centsYN==1){
         return (((sign)?'':'-') + '$' + num + '.' + cents);
     }
+
+    
+    
 }// end myFormatCurrency function
 
+// https://stackoverflow.com/questions/42109818/reliable-js-rounding-numbers-with-tofixed2-of-a-3-decimal-number
+// Closure
+(function() {
+/**
+ * Decimal adjustment of a number.
+ *
+ * @param {String}  type  The type of adjustment.
+ * @param {Number}  value The number.
+ * @param {Integer} exp   The exponent (the 10 logarithm of the adjustment base).
+ * @returns {Number} The adjusted value.
+ */
+function decimalAdjust(type, value, exp) {
+    // If the exp is undefined or zero...
+    if (typeof exp === 'undefined' || +exp === 0) {
+    return Math[type](value);
+    }
+    value = +value;
+    exp = +exp;
+    // If the value is not a number or the exp is not an integer...
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+    return NaN;
+    }
+    // Shift
+    value = value.toString().split('e');
+    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+    // Shift back
+    value = value.toString().split('e');
+    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+}
+
+// Decimal round
+if (!Math.round10) {
+    Math.round10 = function(value, exp) {
+    return decimalAdjust('round', value, exp);
+    };
+}
+// Decimal floor
+if (!Math.floor10) {
+    Math.floor10 = function(value, exp) {
+    return decimalAdjust('floor', value, exp);
+    };
+}
+// Decimal ceil
+if (!Math.ceil10) {
+    Math.ceil10 = function(value, exp) {
+    return decimalAdjust('ceil', value, exp);
+    };
+}
+})();
 
 
 
