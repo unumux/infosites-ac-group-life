@@ -312,7 +312,6 @@ function calc(){
 
     $('#life-calc-life-child-coverage-display').html( myFormatCurrency(chLIFEprem,2));
     $('#life-calc-add-child-coverage-display').html( myFormatCurrency(chADDprem,2));
-    console.log('chADDprem',chADDprem)
 
 
     // *** total ***
