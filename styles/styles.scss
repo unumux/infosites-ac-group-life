@@ -11,8 +11,194 @@ body {
     margin: 0 auto;
 }
 
-.life-calc-cost-row{
-    display: flex;
-    justify-content: space-between;
+// util
+.text-center{
+    text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
+.col-1-4{
+    flex-basis: 25%;
+}
+.col-1-2{
+    flex-basis: 50%;
+}
+.col-3-4{
+    flex-basis: 75%;
+}
+.hideme{
+    display: none !important;
+}
+.hiddenme{
+    visibility: hidden;
+}
+.calc-box .col-width-50{ // extra specificity needed thus the .calc-box addition
+    width: 50%;
+}
+.calc-box .col-width-100{ // extra specificity needed thus the .calc-box addition
+    width: 100%;
+}
+.add-border-right{
+    border-right: 2px dashed #d1d1d1;
 }
 
+// calc page
+.life-calc-h2{
+    margin-top: 2em;
+}
+
+
+// revised need calc +++++++++++
+.life-need-intro{
+    //text-align:center;
+}
+.life-need-calc{
+    display: flex;
+    max-width: 1900px; margin: 0 auto;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    //flex-wrap:wrap;
+}
+@media screen and (max-width: 600px){
+    .life-need-calc{
+        flex-wrap:wrap;
+        & > *{
+            width: 100%;
+        }
+    }
+}
+.life-need-calc-box{
+    border: 2px dashed rgba(128, 128, 128, 0.7);
+    border-radius: 1rem;
+}
+.life-need-calc-box--1{
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width: 600px){
+    .life-need-calc-box--2{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.life-need-operator{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 2rem;
+}
+.life-need-calc-box--3{
+    padding: 1rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.life-need-control{
+    padding: 1rem;
+    text-align: center;
+    & input{
+        max-width: 100px;
+        padding: .3rem;
+    }
+}
+// revised need calc +++++++++++
+
+
+
+
+
+
+// new calc ***************
+.calc-col1{    background-color: #ebebeb;    border-top-left-radius: 10px;    border-top-right-radius: 10px;}
+.calc-col2{    
+    background-color: #d1d1d1;
+    background-color: #ebebeb;
+    border-left: 2px #d1d1d1 dashed;
+    border-right: 2px #d1d1d1 dashed;
+    border-top-left-radius: 10px;    
+    border-top-right-radius: 10px;
+}
+@media screen and (max-width: 600px){
+    .calc-col2{
+        background-color: #d1d1d1;
+        border-left: none;
+        border-right: none;
+    }
+}
+.calc-col3{    background-color: #ebebeb;    border-top-left-radius: 10px;    border-top-right-radius: 10px;}
+
+.calc-box{
+    display:flex;
+}
+@media screen and (max-width: 600px){
+    .calc-box{
+        flex-direction: column;
+    }
+}
+.calc-col{
+    display:flex;
+    flex-direction: column;
+    width: 33.33%;
+    text-align:center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    & > *{
+        flex-basis: 100%;
+        flex-grow:1;
+    }
+}
+@media screen and (max-width: 600px){
+    .calc-col{
+        width: 100%;
+    }
+}
+.label{
+    margin-top: 2rem;
+}
+.col-header{
+    font-size: 2rem;
+    font-weight: bold;
+    //padding-top: 1rem;
+}
+.control input{
+    display: inline-block; // override of willow block style
+}
+.calc-box-summary{
+    text-align: center;
+    background-color: #ebebeb;
+    padding: 2rem;
+    border-top: 2px solid #d1d1d1;
+    font-size: 2rem;
+}
+.calc-box-eoi{
+    text-align: center;
+    background-color: #ebebeb;
+    padding: 2rem;
+    border-top: 2px solid #d1d1d1;
+}
+.control input, .control select{
+    //background-color: lightyellow;
+    //width: 100%;
+    padding: .4rem 1rem;
+    width: 130px;  //https://stackoverflow.com/questions/10672586/how-to-make-select-elements-shrink-to-max-width-percent-style-within-fieldset
+    max-width: 130px;
+}
+.control input[type=checkbox]{
+    width: auto;
+    max-width: auto;
+}
+.life-calc-premium-display{
+    font-weight: bold;
+}
+
+// new calc ***************
