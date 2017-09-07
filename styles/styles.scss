@@ -46,6 +46,58 @@ body {
     border-right: 2px dashed #d1d1d1;
 }
 
+
+
+// overview page - begin
+.welcome-row{
+    display: flex;
+}
+@media screen and (max-width: 767px){
+    .welcome-row{
+        flex-wrap:wrap;
+    }
+}
+.welcome-col1{
+    width: 30%;
+    min-width: 270px;
+}
+.welcome-box{
+    border: 2px green solid;
+    text-align:center;
+}
+.welcome-title{
+    background-color: green;
+    color: white;
+}
+.welcome-logo-image{
+    max-width: 260px;
+} 
+.welcome-col2{
+    background-color: pink;
+    align-self: center;
+}
+
+
+.infosite-row{
+    display: flex;
+    justify-content: space-between;
+    background-color:lightgreen;
+}
+@media screen and (max-width: 600px){
+    .infosite-row{
+        flex-direction: column;
+    }
+}
+.infosite-col{
+    flex: 0 1 45%;
+    background-color:yellow;
+}
+// overview page - end
+
+
+
+
+
 // calc page
 .life-calc-h2{
     margin-top: 2em;
