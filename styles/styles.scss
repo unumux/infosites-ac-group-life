@@ -81,7 +81,7 @@ body {
 .infosite-row{
     display: flex;
     justify-content: space-between;
-    background-color:lightgreen;
+    //background-color:lightgreen;
 }
 @media screen and (max-width: 600px){
     .infosite-row{
@@ -90,7 +90,7 @@ body {
 }
 .infosite-col{
     flex: 0 1 45%;
-    background-color:yellow;
+    //background-color:yellow;
 }
 // overview page - end
 
@@ -99,8 +99,12 @@ body {
 
 
 // calc page
-.life-calc-h2{
-    margin-top: 2em;
+.life-calc-h2, .willow-page-footer{
+    //margin-top: 2em;
+    margin-top: 3rem;
+}
+.life-calc-h2--extraspace{
+    margin-top: 6rem;
 }
 
 
@@ -257,3 +261,26 @@ body {
     padding: 2rem 0;
 }
 // new calc ***************
+
+
+
+
+
+// enrollment page *****************
+.with-pdf-icon:after {
+    content: url('http://unuminfo.com/_MasterTemplateGLTCv3/assets/pdficon1d.gif');
+    padding-left: .5rem;
+}
+.pdf-reader-container{
+    display: flex;
+    align-items: center;
+    & >*:nth-child(1){
+        flex-basis: 30%;
+    }
+    & >*:nth-child(2){
+        flex-basis: 70%;
+    }
+    margin-top: 6rem;
+}
+
+// enrollment page *****************
