@@ -77,6 +77,14 @@ body {
     align-self: center;
 }
 
+.life-calc-h1{
+    font-size: 3.8rem;
+    margin-bottom: 0;
+}
+.life-calc-h1-subhead{
+    font-size: 2.1rem;
+}
+
 
 .infosite-row{
     display: flex;
@@ -267,6 +275,9 @@ body {
 
 
 // enrollment page *****************
+.enrollment-link-li{
+    padding-bottom: .3rem;
+}
 .with-pdf-icon:after {
     content: url('http://unuminfo.com/_MasterTemplateGLTCv3/assets/pdficon1d.gif');
     padding-left: .5rem;
@@ -283,4 +294,7 @@ body {
     margin-top: 6rem;
 }
 
+a, a:visited {
+    color: #467E8E;
+}
 // enrollment page *****************
