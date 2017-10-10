@@ -5,14 +5,14 @@
 }
 
 body {
-    background: #dedede;
+    background: white; //#dedede
     color: #111;
     max-width: 900px;
     margin: 0 auto;
 }
 
 // util
-.text-center{
+/*.text-center{
     text-align: center;
 }
 .text-left{
@@ -29,11 +29,11 @@ body {
 }
 .col-3-4{
     flex-basis: 75%;
-}
+}*/
 .hideme{
     display: none !important;
 }
-.hiddenme{
+/*.hiddenme{
     visibility: hidden;
 }
 .calc-box .col-width-50{ // extra specificity needed thus the .calc-box addition
@@ -41,11 +41,28 @@ body {
 }
 .calc-box .col-width-100{ // extra specificity needed thus the .calc-box addition
     width: 100%;
-}
+}*/
 .add-border-right{
     border-right: 2px dashed #d1d1d1;
 }
+.list-item-spacer{
+    margin-bottom: 1.7rem;
+}
+.infosite-footnote{
+    margin-top: 3rem;
+}
+.infosite-footnote p{
+    font-size: 1.4rem;
+    color: #333;
+}
 
+
+.color-white{
+    color:white;
+}
+.footer-extra-links{
+    margin-top: .5em;
+}
 
 
 // overview page - begin
@@ -80,6 +97,7 @@ body {
 .life-calc-h1{
     font-size: 3.8rem;
     margin-bottom: 0;
+    margin-top: 3rem;
 }
 .life-calc-h1-subhead{
     font-size: 2.1rem;
@@ -100,6 +118,52 @@ body {
     flex: 0 1 45%;
     //background-color:yellow;
 }
+.piggy{
+    width: 100px;
+    float: right;
+    margin-top: -1.5rem;
+}
+.infosite-orange{
+    color: #E9801C;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.infosite-orange--large{
+    font-size: 3rem;
+}
+.overview-bold-blue{
+    color: #004B8D;
+    font-weight: bold;
+}
+.overview-li-blue-text{
+    color: #111;
+    font-weight: normal;
+}
+.infosite-overview-banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media screen and (max-width: 600px){
+    .infosite-overview-banner{
+        flex-direction: column;
+    }
+}
+.infosite-cobrand-logo-placeholder{
+    line-height: 0;
+}
+.infosite-cobrand-logofile{
+    max-width: 300px;
+}
+.infosite-cobrand-logofile-whitespace{
+    padding: 1rem;
+    background-color: white;
+}
+.ADDcontent{
+    display: none;
+}
+
+// withlogo = (hide .infosite-cobrand-logo-placeholder) + (.infosite-cobrand-logo-placeholder => display:block)
 // overview page - end
 
 
@@ -276,7 +340,7 @@ body {
 
 // enrollment page *****************
 .enrollment-link-li{
-    padding-bottom: .3rem;
+    padding-bottom: .4rem;
 }
 .with-pdf-icon:after {
     content: url('http://unuminfo.com/_MasterTemplateGLTCv3/assets/pdficon1d.gif');
