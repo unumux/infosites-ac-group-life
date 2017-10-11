@@ -1,109 +1,57 @@
 @import "node_modules/@unumux/theme-enterprise-default/styles";
 
+// all pages *****************************************
 * {
     box-sizing: border-box;
 }
-
 body {
-    background: white; //#dedede
+    background: white; 
     color: #111;
-    max-width: 900px;
+    max-width: 915px;
     margin: 0 auto;
 }
-
-// util
-/*.text-center{
-    text-align: center;
+a, a:visited {
+    color: #134b5b; // old # 467E8E
 }
-.text-left{
-    text-align: left;
-}
-.text-right{
-    text-align: right;
-}
-.col-1-4{
-    flex-basis: 25%;
-}
-.col-1-2{
-    flex-basis: 50%;
-}
-.col-3-4{
-    flex-basis: 75%;
-}*/
-.hideme{
-    display: none !important;
-}
-/*.hiddenme{
-    visibility: hidden;
-}
-.calc-box .col-width-50{ // extra specificity needed thus the .calc-box addition
-    width: 50%;
-}
-.calc-box .col-width-100{ // extra specificity needed thus the .calc-box addition
-    width: 100%;
-}*/
-.add-border-right{
-    border-right: 2px dashed #d1d1d1;
-}
-.list-item-spacer{
-    margin-bottom: 1.7rem;
-}
-.infosite-footnote{
+.infosite-h2{
     margin-top: 3rem;
 }
-.infosite-footnote p{
-    font-size: 1.4rem;
-    color: #333;
+.infosite-h2--extraspace{ // calc & enrollment
+    margin-top: 6rem;
+}
+.willow-layout{
+    padding: 0 2rem;
+}
+.willow-logo-link{
+    color: white;
+}
+.willow-primary-nav__heading, .willow-footer-nav__heading{
+    color: white;
 }
 
-
+// footer *****************************************
 .color-white{
     color:white;
 }
 .footer-extra-links{
     margin-top: .5em;
 }
-
-
-// overview page - begin
-.welcome-row{
-    display: flex;
-}
-@media screen and (max-width: 767px){
-    .welcome-row{
-        flex-wrap:wrap;
-    }
-}
-.welcome-col1{
-    width: 30%;
-    min-width: 270px;
-}
-.welcome-box{
-    border: 2px green solid;
-    text-align:center;
-}
-.welcome-title{
-    background-color: green;
-    color: white;
-}
-.welcome-logo-image{
-    max-width: 260px;
-} 
-.welcome-col2{
-    background-color: pink;
-    align-self: center;
+.willow-page-footer{
+    margin-top: 3rem;
 }
 
-.life-calc-h1{
+
+
+// overview page *****************************************
+.overview-h1{
     font-size: 3.8rem;
     margin-bottom: 0;
     margin-top: 3rem;
+    line-height: 1.3;
 }
-.life-calc-h1-subhead{
+.overview-h1-subhead{
     font-size: 2.1rem;
 }
-
-
 .infosite-row{
     display: flex;
     justify-content: space-between;
@@ -124,7 +72,7 @@ body {
     margin-top: -1.5rem;
 }
 .infosite-orange{
-    color: #E9801C;
+    color: #C75302;  //E9801C
     font-weight: bold;
     font-size: 2rem;
 }
@@ -156,13 +104,28 @@ body {
     max-width: 300px;
 }
 .infosite-cobrand-logofile-whitespace{
-    padding: 1rem;
+    padding: 2rem;
     background-color: white;
+}
+.list-item-spacer{
+    margin-bottom: 1.7rem;
+}
+.infosite-footnote{
+    margin-top: 3rem;
+}
+.infosite-footnote p{
+    font-size: 1.4rem;
+    color: #333;
 }
 .ADDcontent{
     display: none;
 }
-
+.SetAsBlock{
+    display: block !important;
+}
+.overview-less-left-padding{
+    padding-left: 2rem;
+}
 // withlogo = (hide .infosite-cobrand-logo-placeholder) + (.infosite-cobrand-logo-placeholder => display:block)
 // overview page - end
 
@@ -170,27 +133,31 @@ body {
 
 
 
-// calc page
-.life-calc-h2, .willow-page-footer{
-    //margin-top: 2em;
-    margin-top: 3rem;
+// calc page *****************************************
+.hideme{
+    display: none !important;
 }
-.life-calc-h2--extraspace{
-    margin-top: 6rem;
+.hiddenme{ // js class
+    visibility: hidden;
+}
+.calc-box .col-width-50{ // extra specificity needed thus the .calc-box addition (js class)
+    width: 50%;
+}
+.calc-box .col-width-100{ // extra specificity needed thus the .calc-box addition (js class)
+    width: 100%;
+}
+.add-border-right{ // js class
+    border-right: 2px dashed #d1d1d1;
 }
 
 
 // revised need calc +++++++++++
-.life-need-intro{
-    //text-align:center;
-}
 .life-need-calc{
     display: flex;
     max-width: 1900px; margin: 0 auto;
     justify-content: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    //flex-wrap:wrap;
 }
 @media screen and (max-width: 600px){
     .life-need-calc{
@@ -246,7 +213,7 @@ body {
 
 
 
-// new calc ***************
+// new calc @@@@@@@@@@@@@
 .calc-col1{    background-color: #ebebeb;    border-top-left-radius: 10px;    border-top-right-radius: 10px;}
 .calc-col2{    
     background-color: #d1d1d1;
@@ -296,7 +263,6 @@ body {
 .col-header{
     font-size: 2rem;
     font-weight: bold;
-    //padding-top: 1rem;
 }
 .control input{
     display: inline-block; // override of willow block style
@@ -332,16 +298,29 @@ body {
 .calc-disclaimer{
     padding: 2rem 0;
 }
-// new calc ***************
+// new calc @@@@@@@@@@@@@
 
 
 
 
 
-// enrollment page *****************
+// enrollment page *****************************************
 .enrollment-link-li{
     padding-bottom: .4rem;
 }
+.with-pdf-icon{
+    color: #134B5B;
+}
+.with-pdf-icon:visited{
+    color: indigo;
+}
+.with-pdf-icon:hover{
+    color: darkred;
+}
+.with-pdf-icon:active{
+    color: mediumpurple;
+}
+
 .with-pdf-icon:after {
     content: url('http://unuminfo.com/_MasterTemplateGLTCv3/assets/pdficon1d.gif');
     padding-left: .5rem;
@@ -357,8 +336,4 @@ body {
     }
     margin-top: 6rem;
 }
-
-a, a:visited {
-    color: #467E8E;
-}
-// enrollment page *****************
+// enrollment page 

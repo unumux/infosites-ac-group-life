@@ -1,33 +1,21 @@
-//  variables                     
-let employee_annual_salary = 56516; 
-let employee_age = 21;              
-let spouse_age = 21;                
-let employee_life_coverage = 0;     
-let spouse_life_coverage = 0;       
-let child_life_coverage = 0;        
-let employee_add_coverage = 0;      
-let spouse_add_coverage = 0;        
-let child_add_coverage = 0; 
-//let employee_tobacco_YN = true; 
-//let spouse_tobacco_YN = true;   
+let eeRatesPer = 10000;     // employee rates per x amount of coverage 
+let spRatesPer = 5000;      // spouse rates per x amount of coverage
+let chRatesPer = 2000;      // child rates per x amount of coverage
 
-let eeRatesPer = 10000;
-let spRatesPer = 5000;
-let chRatesPer = 2000;
+let eeLifeMin = 10000;      // employee life coverage minimum (ADD matches this)
+let eeLifeMax = 500000;     // employee life coverage maximum (ADD matches this)
+let eeLifeInc = 10000;      // employee life coverage increments (ADD matches this)
+let eeEOImax  = 100000;     // employee Evidence Of Insurability maximum  (coverage higher than this requires medical underwriting)
+let eeXSalaryMax = 5;       // employee "times salary" maximum (used to determine max allowed coverage)
 
-let eeLifeMin = 10000;
-let eeLifeMax = 500000;
-let eeLifeInc = 10000;
-let eeEOImax  = 100000;
-let eeXSalaryMax = 5;
-
-let spLifeMin = 5000;
-let spLifeMax = 500000;
-let spLifeInc = 5000;
-let spEOImax  = 25000;
-let spMaxOfEE = 50; // 100 or 50 (percent)
-let spTOB_YN = true;
-let spUseEErates_YN = false;
+let spLifeMin = 5000;                           // spouse life coverage minimum (ADD matches this)
+let spLifeMax = 500000;                         // spouse life coverage maximum (ADD matches this)
+let spLifeInc = 5000;                           // spouse life coverage increments (ADD matches this)
+let spEOImax  = 25000;                          // spouse Evidence Of Insurability maximum  (coverage higher than this requires medical underwriting)
+let spMaxOfEE = 100; // 100 or 50 (percent)     // spouse maximum coverage restricted by this percent of employee coverage 
+let spTOB_YN = true;                            // makes spouse tobacco checkbox hidden (still takes up space)
+let spUseEErates_YN = false;                    // have spouse rates match employee rates
+let spUseEEage_YN = false;                      // have spouse age match employee age
 
 let chLifeMin = 2000;
 let chLifeMax = 10000;
@@ -42,16 +30,16 @@ let ageReduction =  [
                      { min: 75, max: 79,  percent: .50 }, 
                      { min: 80, max: 999, percent: .30 },
                     ];
-var modalRates = 12;   // modal for given rates (monthly=12; semi-monthly=24; biweekly=26; weekly=52)
-var modalDisplay = 12; // modal to convert and display premium as (overridded by modal dropdown, if enabled)
-var useModalDropdown = false;
+var modalRates = 12;            // modal for given rates (monthly=12; semi-monthly=24; biweekly=26; weekly=52)
+var modalDisplay = 12;          // modal to convert and display premium as (overridded by modal dropdown, if enabled)
+var useModalDropdown = false;   // activate a dropdown next to the premium allowing different views (monthly/biweekly/etc) of premium
 
-var TOB_YN = true; // toggle display of tobacco questions
-var ADD_YN = true;  // toggle display of AD&D questions
+var TOB_YN = true;          // toggle display of tobacco questions
+var ADD_YN = true;          // toggle display of AD&D questions
 var spDisplayAll_YN = true; // toggle display of entire spouse section
-var spLIFEblock_YN = true; // toggle display of sp Life in calc grid
-var spADDblock_YN = true;  // toggle display of sp ADD in calc grid
-var chDisplayAll_YN = true; // toggle display of entire spouse section
+var spLIFEblock_YN = true;  // toggle display of sp Life in calc grid
+var spADDblock_YN = true;   // toggle display of sp ADD in calc grid
+var chDisplayAll_YN = true; // toggle display of entire spouse section 
 
 
 function getrate(age){
@@ -77,6 +65,18 @@ function getrate(age){
     return ra;
 }// end getrate() function
 
+//  variables                     
+let employee_annual_salary = 56516; 
+let employee_age = 21;              
+let spouse_age = 21;                
+let employee_life_coverage = 0;     
+let spouse_life_coverage = 0;       
+let child_life_coverage = 0;        
+let employee_add_coverage = 0;      
+let spouse_add_coverage = 0;        
+let child_add_coverage = 0; 
+//let employee_tobacco_YN = true; 
+//let spouse_tobacco_YN = true;  
 
 function initializeLifeCalculator(){
     if (!TOB_YN)        { $('.life-calc-employee-tobacco-block, .life-calc-spouse-tobacco-block').addClass('hideme');}
@@ -100,13 +100,13 @@ function initializeLifeCalculator(){
     }
 
     
-                    populateDD($('#life-calc-life-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc, eeEOImax)
+                 populateDD($('#life-calc-life-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc, eeEOImax)
     if (ADD_YN){ populateDD($('#life-calc-add-employee-coverage'), eeLifeMin, eeLifeMax, eeLifeInc) }
 
-                    populateDD($('#life-calc-life-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc, spEOImax)
+                 populateDD($('#life-calc-life-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc, spEOImax)
     if (ADD_YN){ populateDD($('#life-calc-add-spouse-coverage'), spLifeMin, spLifeMax, spLifeInc) }
 
-                    populateDD($('#life-calc-life-child-coverage'), chLifeMin, chLifeMax, chLifeInc)
+                 populateDD($('#life-calc-life-child-coverage'), chLifeMin, chLifeMax, chLifeInc)
     if (ADD_YN){ populateDD($('#life-calc-add-child-coverage'), chLifeMin, chLifeMax, chLifeInc) }
 
     
@@ -128,6 +128,10 @@ function initializeLifeCalculator(){
         $('#modalDD').removeClass('hideme');
         $('#modalNormalDesc').addClass('hideme');
         modalDisplay = document.getElementById("modalDD").value;
+    }
+
+    if(!spTOB_YN){
+        $('.life-calc-spouse-tobacco-block').addClass('hiddenme');
     }
     
 
@@ -184,6 +188,10 @@ function calc(){
         $('.life-calc-age-reduced-box').addClass('hideme')
     }
 
+    if (useModalDropdown){
+        modalDisplay = document.getElementById("modalDD").value;
+    }
+
     // *** Employee ***
     rates = getrate(employee_age);
     var eeliferate      = rates[0];
@@ -220,7 +228,7 @@ function calc(){
     }
     employee_add_coverage=input2Number( $('#life-calc-add-employee-coverage').val() )
 
-    if (employee_life_coverage >= eeEOImax){
+    if (employee_life_coverage > eeEOImax){
         eoi_triggered_YN = true;
     }
 
@@ -234,12 +242,22 @@ function calc(){
 
     // *** Spouse ***
     rates = getrate(spouse_age);
+    if (spUseEEage_YN){
+        rates = getrate(employee_age);
+        $('#life-calc-spouse-age-input-block').addClass('hiddenme');
+    }
     var spliferate      = rates[3];
     var sptobliferate   = rates[4];  
     var spaddrate       = rates[5];
     
     if ( $('#life-calc-spouse-tobaccoYN').is(':checked') ){
         spliferate = sptobliferate;
+    }
+
+    if (spUseEErates_YN){
+        spliferate = eeliferate;
+        sptobliferate = eetobliferate;
+        spaddrate = eeaddrate;
     }
 
     var eeFactor = spMaxOfEE/100; // convert to decimal equavalent for easy percentage multiplication
@@ -267,7 +285,7 @@ function calc(){
     }
     spouse_add_coverage=input2Number( $('#life-calc-add-spouse-coverage').val() )
 
-    if (spouse_life_coverage >= spEOImax){
+    if (spouse_life_coverage > spEOImax){
         eoi_triggered_YN = true;
     }
 
