@@ -7,11 +7,24 @@
 body {
     background: white; 
     color: #111;
-    max-width: 915px;
+    max-width: 900px;
     margin: 0 auto;
 }
-a, a:visited {
-    color: #134b5b; // old # 467E8E
+.infosite-link:link{
+    color: #134B5B;
+}
+.infosite-link:visited{
+    color: indigo;
+}
+.infosite-link:hover{
+    color: darkred;
+}
+.infosite-link:active{
+    color: mediumpurple;
+}
+.with-pdf-icon:after {
+    content: url('http://unuminfo.com/_MasterTemplateGLTCv3/assets/pdficon1d.gif');
+    padding-left: .5rem;
 }
 .infosite-h2{
     margin-top: 3rem;
@@ -29,16 +42,7 @@ a, a:visited {
     color: white;
 }
 
-// footer *****************************************
-.color-white{
-    color:white;
-}
-.footer-extra-links{
-    margin-top: .5em;
-}
-.willow-page-footer{
-    margin-top: 3rem;
-}
+
 
 
 
@@ -52,25 +56,32 @@ a, a:visited {
 .overview-h1-subhead{
     font-size: 2.1rem;
 }
-.infosite-row{
-    display: flex;
-    justify-content: space-between;
-    //background-color:lightgreen;
-}
-@media screen and (max-width: 600px){
-    .infosite-row{
-        flex-direction: column;
-    }
-}
-.infosite-col{
-    flex: 0 1 45%;
-    //background-color:yellow;
-}
 .piggy{
-    width: 100px;
+    width: 150px;
     float: right;
     margin-top: -1.5rem;
 }
+// from animate.css
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+.piggy:hover{ //.pulse {
+    animation-name: pulse;
+}
+
+
 .infosite-orange{
     color: #C75302;  //E9801C
     font-weight: bold;
@@ -122,9 +133,6 @@ a, a:visited {
 }
 .SetAsBlock{
     display: block !important;
-}
-.overview-less-left-padding{
-    padding-left: 2rem;
 }
 // withlogo = (hide .infosite-cobrand-logo-placeholder) + (.infosite-cobrand-logo-placeholder => display:block)
 // overview page - end
@@ -281,8 +289,6 @@ a, a:visited {
     border-top: 2px solid #d1d1d1;
 }
 .control input, .control select{
-    //background-color: lightyellow;
-    //width: 100%;
     padding: .4rem 1rem;
     width: 130px;  //https://stackoverflow.com/questions/10672586/how-to-make-select-elements-shrink-to-max-width-percent-style-within-fieldset
     max-width: 130px;
@@ -308,23 +314,6 @@ a, a:visited {
 .enrollment-link-li{
     padding-bottom: .4rem;
 }
-.with-pdf-icon{
-    color: #134B5B;
-}
-.with-pdf-icon:visited{
-    color: indigo;
-}
-.with-pdf-icon:hover{
-    color: darkred;
-}
-.with-pdf-icon:active{
-    color: mediumpurple;
-}
-
-.with-pdf-icon:after {
-    content: url('http://unuminfo.com/_MasterTemplateGLTCv3/assets/pdficon1d.gif');
-    padding-left: .5rem;
-}
 .pdf-reader-container{
     display: flex;
     align-items: center;
@@ -336,4 +325,17 @@ a, a:visited {
     }
     margin-top: 6rem;
 }
-// enrollment page 
+
+
+
+
+// footer *****************************************
+.color-white{
+    color:white;
+}
+.footer-extra-links{
+    margin-top: .5em;
+}
+.willow-page-footer{
+    margin-top: 3rem;
+}

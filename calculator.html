@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="styles/styles.min.css">
 </head>
 <body>
-    <div class="willow-layout">
+    <div class="container">
 
-       <div class="willow-layout__row--no-margin-bottom">
-           <div class="willow-layout__column--12">
-               <header class="willow-page-header" role="banner">
+        <div class="row">
+            <div class="col-lg-12">
+                <header class="willow-page-header" role="banner">
                     <div class="willow-page-header__branding">
-                       <a class="willow-logo-link" href="/" aria-label="go to home page">
+                        <a class="willow-logo-link" href="/" aria-label="go to home page">
                         <img class="willow-logo-link__image" src="logo_unum_reverse.svg" alt="unum logo" />
-                       </a>
+                        </a>
                     </div>
                     <div class="willow-page-header__content-controls">
                         <a class="willow-page-header__content-open" href="#">Menu</a>
@@ -23,109 +23,112 @@
                     </div>
                     <div class="willow-page-header__content">
                         <div class="willow-page-header__navigation">
-                           <nav class="willow-primary-nav" role="navigation" aria-label="Primary Navigation">
-                               <h1 class="willow-primary-nav__heading sr-only">Primary Navigation</h1>
-                               <ul class="willow-primary-nav__list">
-                                   <li class="willow-primary-nav__item"><a class="willow-primary-nav__link" href="overview.html">Overview</a></li>
-                                   <li class="willow-primary-nav__item"><a class="willow-primary-nav__link willow-primary-nav__link--active" href="calculator.html">Calculator</a></li>
-                                   <li class="willow-primary-nav__item"><a class="willow-primary-nav__link" href="enrollment.html">Enrollment</a></li>
-                               </ul>
-                           </nav>
+                            <nav class="willow-primary-nav" role="navigation" aria-label="Primary Navigation">
+                                <h1 class="willow-primary-nav__heading sr-only">Primary Navigation</h1>
+                                <ul class="willow-primary-nav__list">
+                                    <li class="willow-primary-nav__item"><a class="willow-primary-nav__link" href="overview.html">Overview</a></li>
+                                    <li class="willow-primary-nav__item"><a class="willow-primary-nav__link willow-primary-nav__link--active" href="calculator.html">Calculator</a></li>
+                                    <li class="willow-primary-nav__item"><a class="willow-primary-nav__link" href="enrollment.html">Enrollment</a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
-               </header>
-           </div>
-       </div>
-       <div class="willow-layout__row">
-           <div class="willow-layout__column--12">
-               <section class="willow-banner" role="region">
-                  <h1 class="willow-banner__heading">Calculator</h1>
-                  <div class="willow-banner__content">
-                       <div class="willow-styling-context">
-                           <p>In this case, there are two. Here to help you find the right cost-to-benefit balance.</p>
-                       </div>
-                  </div>
-               </section>
+                </header>
+            </div>
+        </div>
 
-           </div>
-       </div>
-       <div class="willow-layout__row">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="willow-banner" role="region">
+                    <h1 class="willow-banner__heading">Calculator</h1>
+                    <div class="willow-banner__content">
+                        <div class="willow-styling-context">
+                            <p>In this case, there are two. Here to help you find the right cost-to-benefit balance.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
 
-           <nav class="willow-breadcrumbs" role="navigation" aria-label="Breadcrumb Navigation">
-                <h1 class="willow-breadcrumbs__heading sr-only">You are here:</h1>
-                <ol class="willow-breadcrumbs__list">
-                    <li class="willow-breadcrumbs__item"><a class="willow-breadcrumbs__link" href="" aria-label="">Return to Menu</a></li>
-                    <li class="willow-breadcrumbs__item">Term Life Insurance</li>
-                    <li class="willow-breadcrumbs__item willow-breadcrumbs__item--active">Calculator</li>
-                </ol>
-            </nav>
-
-
-
-           <div class="willow-layout__column--12">
-               <main class="willow-page-content" role="main">
-                   <div class="willow-styling-context">
-
-                       <h2 class="infosite-h2">1. Life Insurance Need Calculator</h2>
-                       <p class="life-need-intro">Your <strong>current debt</strong> added to the <strong>number of years your family would need your income</strong> is a quick way to estimate <strong>how much life insurance you need</strong>.</p>
-                       
-                       
-                       <div class="life-need-calc">
-                           <div class="life-need-calc-box life-need-calc-box--1">
-                               <div>
-                                   <div class="life-need-control">
-                                       <div><label for="calc-life-need-debt1">Credit cards</label></div>
-                                       <div><input type="input" id="calc-life-need-debt1" value="$16,425" class="activates-need-calc" /></div>
-                                   </div>
-                                   <div class="life-need-control">
-                                       <div><label for="calc-life-need-debt2">Mortgages</label></div>
-                                       <div><input type="input" id="calc-life-need-debt2" value="$180,018" class="activates-need-calc" /></div>
-                                   </div>
-                               </div>
-                               
-                               <div>
-                                   <div class="life-need-control">
-                                       <div><label for="calc-life-need-debt3">Auto loans</label></div>
-                                       <div><input type="input" id="calc-life-need-debt3" value="$29,058" class="activates-need-calc" /></div>
-                                   </div>
-                                   <div class="life-need-control">
-                                       <div><label for="calc-life-need-debt4">Student loans</label></div>
-                                       <div><input type="input" id="calc-life-need-debt4" value="$50,868" class="activates-need-calc" /></div>
-                                   </div>
-                               </div>
-                           </div>
-                           
-                           <div class="life-need-operator">+</div>
-                       
-                           <div class="life-need-calc-box life-need-calc-box--2">
-                               <div class="life-need-control">
-                                   <div><label for="calc-life-need-salary">Annual salary</label></div>
-                                   <div><input type="input" id="calc-life-need-salary" value="$56,516" class="activates-need-calc" /></div>
-                               </div>
-                               <div class="life-need-control">
-                                   <div><label for="calc-life-need-years"># of years</label></div>
-                                   <div><input type="input" id="calc-life-need-years" value="3" class="activates-need-calc" /></div>
-                               </div>
-                           </div>
-                       
-                           <div class="life-need-operator">=</div>
-                       
-                           <div class="life-need-calc-box life-need-calc-box--3">
-                               <div class="calc-life-need-recommended-amount">
-                                   $450,000
-                               </div>
-                           </div>
-                       </div>
-                       
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="willow-breadcrumbs" role="navigation" aria-label="Breadcrumb Navigation">
+                    <h1 class="willow-breadcrumbs__heading sr-only">You are here:</h1>
+                    <ol class="willow-breadcrumbs__list">
+                        <li class="willow-breadcrumbs__item"><a class="willow-breadcrumbs__link infosite-link" href="" aria-label="">Return to Menu</a></li>
+                        <li class="willow-breadcrumbs__item">Term Life Insurance</li>
+                        <li class="willow-breadcrumbs__item willow-breadcrumbs__item--active">Calculator</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
 
 
-                       <h2 class="infosite-h2 infosite-h2--extraspace">2. Life Insurance Cost-Benefit Calculator</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <main class="willow-page-content" role="main">
+                    <div class="willow-styling-context">
 
-                       <p>This calculator takes into account the custom plan design created for you.</p>
+                        <h2 class="infosite-h2">1. Life Insurance Need Calculator</h2>
+                        <p class="life-need-intro">Your <strong>current debt</strong> added to the <strong>number of years your family would need your income</strong> is a quick way to estimate <strong>how much life insurance you need</strong>.</p>
+                        
+                        
+                        <div class="life-need-calc">
+                            <div class="life-need-calc-box life-need-calc-box--1">
+                                <div>
+                                    <div class="life-need-control">
+                                        <div><label for="calc-life-need-debt1">Credit cards</label></div>
+                                        <div><input type="input" id="calc-life-need-debt1" value="$16,425" class="activates-need-calc" /></div>
+                                    </div>
+                                    <div class="life-need-control">
+                                        <div><label for="calc-life-need-debt2">Mortgages</label></div>
+                                        <div><input type="input" id="calc-life-need-debt2" value="$180,018" class="activates-need-calc" /></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="life-need-control">
+                                        <div><label for="calc-life-need-debt3">Auto loans</label></div>
+                                        <div><input type="input" id="calc-life-need-debt3" value="$29,058" class="activates-need-calc" /></div>
+                                    </div>
+                                    <div class="life-need-control">
+                                        <div><label for="calc-life-need-debt4">Student loans</label></div>
+                                        <div><input type="input" id="calc-life-need-debt4" value="$50,868" class="activates-need-calc" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="life-need-operator">+</div>
+                        
+                            <div class="life-need-calc-box life-need-calc-box--2">
+                                <div class="life-need-control">
+                                    <div><label for="calc-life-need-salary">Annual salary</label></div>
+                                    <div><input type="input" id="calc-life-need-salary" value="$56,516" class="activates-need-calc" /></div>
+                                </div>
+                                <div class="life-need-control">
+                                    <div><label for="calc-life-need-years"># of years</label></div>
+                                    <div><input type="input" id="calc-life-need-years" value="3" class="activates-need-calc" /></div>
+                                </div>
+                            </div>
+                        
+                            <div class="life-need-operator">=</div>
+                        
+                            <div class="life-need-calc-box life-need-calc-box--3">
+                                <div class="calc-life-need-recommended-amount">
+                                    $450,000
+                                </div>
+                            </div>
+                        </div>
+                        
 
-                       <div class="calc-box">
+
+                        <h2 class="infosite-h2 infosite-h2--extraspace">2. Life Insurance Cost-Benefit Calculator</h2>
+
+                        <p>This calculator takes into account the custom plan design created for you.</p>
+
+                        <div class="calc-box">
                             <div class="calc-col calc-col1 life-calc-employee-col">
-                                 <div class="col-header">Employee</div>
+                                    <div class="col-header">Employee</div>
                                 <div class="controlbox">
                                     <div class="label"><label for="life-calc-annual-salary">Annual Salary</label></div>
                                     <div class="control"><input id="life-calc-annual-salary" type="input" value="$56,516"></div>
@@ -279,35 +282,37 @@
 
                         <p class="calc-disclaimer">Calculated premium is for illustration purposes only and is based on the age and choices selected. Eligibility for, entitlement to, and amount of actual benefits will be determined according to the terms of the policy.</p>
 
-                   </div>
-               </main>
-           </div>
-       </div>
-       <div class="willow-layout__row">
-           <div class="willow-layout__column--12">
-               <footer class="willow-page-footer" role="contentinfo">
-                  <div class="willow-page-footer__branding">
-                       <a class="willow-logo-link" href="/" aria-label="go to home page">
-                            <img class="willow-logo-link__image" src="logo_unum_reverse.svg" alt="unum logo" />
-                       </a>
-                  </div>
-                  <div class="willow-page-footer__navigation">
-                    <nav class="willow-footer-nav" role="navigation" aria-label="Footer Navigation">
-                       <h1 class="willow-footer-nav__heading sr-only">Footer Navigation</h1>
-                       <ul class="willow-footer-nav__list">
-                           <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="overview.html" aria-label="Overview">Overview</a></li>
-                           <li class="willow-footer-nav__item color-white">Calculator</li>
-                           <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="enrollment.html" aria-label="Enrollment">Enrollment</a></li>
-                       </ul>
-                    </nav>
-               </div>
-               <small class="willow-page-footer__copyright">&copy; <script>document.write(new Date().getFullYear())</script> Unum Group. All rights reserved.  Unum is a registered trademark and marketing brand of Unum Group and its insuring subsidiaries.</small>
+                    </div>
+                </main>
+            </div>
+        </div>
 
-               <small class="willow-page-footer__copyright footer-extra-links"><a class="willow-footer-nav__link" href="" aria-label="">Legal</a> | <a class="willow-footer-nav__link" href="" aria-label="">Privacy</a> | <a class="willow-footer-nav__link" href="" aria-label="">unum.com</a></small>
-               </footer>
-           </div>
-       </div>
-    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <footer class="willow-page-footer" role="contentinfo">
+                    <div class="willow-page-footer__branding">
+                        <a class="willow-logo-link" href="/" aria-label="go to home page">
+                            <img class="willow-logo-link__image" src="logo_unum_reverse.svg" alt="unum logo" />
+                        </a>
+                    </div>
+                    <div class="willow-page-footer__navigation">
+                    <nav class="willow-footer-nav" role="navigation" aria-label="Footer Navigation">
+                        <h1 class="willow-footer-nav__heading sr-only">Footer Navigation</h1>
+                        <ul class="willow-footer-nav__list">
+                            <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="overview.html" aria-label="Overview">Overview</a></li>
+                            <li class="willow-footer-nav__item color-white">Calculator</li>
+                            <li class="willow-footer-nav__item"><a class="willow-footer-nav__link" href="enrollment.html" aria-label="Enrollment">Enrollment</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <small class="willow-page-footer__copyright">&copy; <script>document.write(new Date().getFullYear())</script> Unum Group. All rights reserved.  Unum is a registered trademark and marketing brand of Unum Group and its insuring subsidiaries.</small>
+
+                <small class="willow-page-footer__copyright footer-extra-links"><a class="willow-footer-nav__link" href="" aria-label="">Legal</a> | <a class="willow-footer-nav__link" href="" aria-label="">Privacy</a> | <a class="willow-footer-nav__link" href="" aria-label="">unum.com</a></small>
+                </footer>
+            </div>
+        </div>
+
+    </div><!-- /container -->
     <script src="scripts/site.min.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
